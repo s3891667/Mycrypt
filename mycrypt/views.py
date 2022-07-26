@@ -2,11 +2,13 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.template import loader
+from .models import *
 
 
 def index(request):
-    return redirect('mycrypt/index.html')
+    return render(request, 'mycrypt/index.html')
+
 
 def home(request):
     if not request.user.is_authenticated:

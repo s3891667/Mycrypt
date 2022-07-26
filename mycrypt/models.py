@@ -26,6 +26,16 @@ class CoinData(models.Model):
     def __str__(self):
         return str(self.price)
 
+
+class User(models.Model):
+    userName = models.CharField(max_length=30)
+    passWord = models.CharField(max_length=50)
+    role = models.CharField(max_length=30)
+     
+    def __str__(self):
+        return self.userName
+
+
 # The model will be classes to display the data such as prices for the users
 # then allow them to set track status for the currencies
 # display and id of the currency + price -> if the user tick on track
