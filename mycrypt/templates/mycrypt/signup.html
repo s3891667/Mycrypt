@@ -1,0 +1,16 @@
+{% extends 'mycrypt/home.html' %}
+{% block title %}Sing Up{% endblock %}
+
+{% block body %}
+    <h2>Sign Up</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="uname" placeholder="Username">
+        <br><br>
+        <input type="password" name="pwd" placeholder="Password">
+        <br><br>
+        <input type="submit" name="submit" value="Sign Up">
+    </form>
+
+{% endblock %}
