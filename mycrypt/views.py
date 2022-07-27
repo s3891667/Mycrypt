@@ -21,8 +21,7 @@ def home(request):
         param = {'current_user': current_user}
         return render(request, 'mycrypt/home.html', param)
     else:
-        # return redirect('/mycrypt/')
-        return redirect('login/')
+        return redirect('/mycrypt/login/')
     return render(request, 'mycrypt/login.html')
 
 
