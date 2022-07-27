@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.template import loader
-from .models import *
+from .models import User
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 
@@ -30,7 +30,6 @@ def signUp(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        # print(uname, pwd)
         if User.objects.filter(userName=uname).count() > 0:
             return HttpResponse('userName already exists.')
         else:
@@ -45,15 +44,15 @@ def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        # hash_verify = django_pbkdf2_sha256.verify()
-        check_user = User.objects.filter(
-            userName=uname, passWord=make_password(pwd))
-        if check_user:
-            request.session['user'] = uname
-            return redirect('/mycrypt/home/')
-        else:
-            return HttpResponse('Please enter valid userName or passWord.')
-
+        for i in User.objects.all():
+            check_user = i.userName == uname
+            if check_user:
+                hash_verify = django_pbkdf2_sha256.verify(pwd, i.passWord)
+                if hash_verify:
+                    request.session['user'] = uname
+                    return redirect('/mycrypt/home/')
+                else:
+                    return HttpResponse('Please enter valid userName or passWord.')
     return render(request, 'mycrypt/login.html')
 
 
