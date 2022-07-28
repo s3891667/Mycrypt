@@ -22,17 +22,20 @@ def home(request):
         return render(request, 'mycrypt/home.html', param)
     else:
         return redirect('/mycrypt/login/')
-    return render(request, 'mycrypt/login.html')
 
 
 def signUp(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
+        rl = request.POST.get('role')
+        pwd2 = request.POST.get('pwd2')
         if User.objects.filter(userName=uname).count() > 0:
             return HttpResponse('userName already exists.')
+        if pwd != pwd2:
+            return HttpResponse('passWord does not match.')
         else:
-            user = User(userName=uname, passWord=make_password(pwd))
+            user = User(userName=uname, passWord=make_password(pwd), role=rl)
             user.save()
             return redirect('/mycrypt/login/')
     else:
@@ -43,15 +46,12 @@ def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        for i in User.objects.all():
-            check_user = i.userName == uname
-            if check_user:
-                hash_verify = django_pbkdf2_sha256.verify(pwd, i.passWord)
-                if hash_verify:
-                    request.session['user'] = uname
-                    return redirect('/mycrypt/home/')
-                else:
-                    return HttpResponse('Please enter valid userName or passWord.')
+        userCheck = User.objects.get(userName=uname)
+        if (userCheck.userName == uname) and (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
+            request.session['user'] = uname
+            return redirect('/mycrypt/home/')
+        else:
+            return HttpResponse('Please enter valid userName or passWord.')
     return render(request, 'mycrypt/login.html')
 
 
