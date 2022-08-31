@@ -1,11 +1,22 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.conf import settings
 from django.template import loader
+from mycrypt.forms import UserForm
+from mycrypt.validators import NumberValidator
 from .models import User
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
+from django.views.decorators.clickjacking import xframe_options_deny
+from . import *
+
+# To protect the website from being emmbed
+
+
+@xframe_options_deny
+def view_one(request):
+    return HttpResponse("Stop doing this !")
 
 
 def index(request):

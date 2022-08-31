@@ -2,9 +2,18 @@
 <html>
   <head>
     <title>{% block title %}{% endblock %}</title>
+    <script
+      type="text/javascript"
+      src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"
+    ></script>
+    <script type="text/javascript" src="../../static/mycrypt/graph.js"></script>
   </head>
   <body>
-    <h1>My Site</h1>
+    <h1>Mycrypt</h1>
 
     <a href="#">Home</a>
     <span>/</span>
@@ -20,5 +29,6 @@
     <hr />
     <h2>Login to access this website!</h2>
     {% endif %} {% block body %}{% endblock %}
+    <div id="chartContainer" style="height: 500px; width: 100%"></div>
   </body>
 </html>
