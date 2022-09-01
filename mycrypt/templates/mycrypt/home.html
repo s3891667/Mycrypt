@@ -6,15 +6,24 @@
       type="text/javascript"
       src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
+      defer
       type="text/javascript"
-      src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"
+      src="../../static/mycrypt/historyGraph.js"
     ></script>
-    <script type="text/javascript" src="../../static/mycrypt/graph.js"></script>
+    <script
+      defer
+      type="text/javascript"
+      src="../../static/mycrypt/realTimeGraph.js"
+    ></script>
   </head>
   <body>
     <h1>Mycrypt</h1>
-
+    <h2 id="stock">BTC/USD</h2>
+    <h2 id="stock2">ETH/USD</h2>
     <a href="#">Home</a>
     <span>/</span>
 
