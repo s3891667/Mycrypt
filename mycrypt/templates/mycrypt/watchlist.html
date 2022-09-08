@@ -5,8 +5,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>watchlist</title>
+
+    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
+    <link rel="stylesheet" href="../../static/mycrypt/style.css">
 </head>
 <body>
-    
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container">
+        <a href="#" class="navbar-brand">mycrypt</a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Cryptocurrencies</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#">Watchlist</a></li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+
+    <section class="p-5 ">
+        <div class="container table-bordered">
+            <table class="table table-hover">
+                <caption class="caption-top"> watchlist </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Coin</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Bitcoin</td>
+                    <td>$23,538.78</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>USD Coin</td>
+                    <td>$1.00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td >Cardano</td>
+                    <td> $0.52</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                  </tr><tr>
+                    <th scope="row">9</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">11</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">12</th>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+        </div>
+    </section>
+
+    <footer class="p-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="lead">Copyright &copy; mycrypt 2022</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $('#TRawMaterialStorageTable').bootstrapTable('resetView', {height: 349});
+        });
+    </script>
+
+    <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
 </body>
 </html>
