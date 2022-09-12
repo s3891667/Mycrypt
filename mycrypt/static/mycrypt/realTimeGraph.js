@@ -24,16 +24,13 @@ const binanceSocket = new WebSocket(
     "wss://stream.binance.com:9443/ws/ethusdt@kline_1m"
 );
 binanceSocket.onmessage = function (event) {
-    console.log(event.data);
     const data = JSON.parse(event.data);
     const cdata2 = {
-        time: (data["k"]["t"] / 1000).toString(),
         open: data["k"]["o"],
         high: data["k"]["h"],
         low: data["k"]["l"],
         close: data["k"]["c"],
     };
-    // console.log(cdata2);
     candleSeries2.update(cdata2);
 };
 
