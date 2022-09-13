@@ -1,6 +1,8 @@
 # from urllib import response
+from secrets import choice
 from django.db import models
 from django.conf import settings
+
 
 class Coin(models.Model):
     name = models.CharField(max_length=200)
@@ -28,6 +30,21 @@ class User(models.Model):
     def __str__(self):
         return self.userName
 
+
+class Content(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    date = models.DateField()
+    author = models.CharField(max_length=30)
+    source = models.URLField(max_length=200)
+    status = models.CharField(max_length=1, choices=[
+        ('d', 'Draft'),
+        ('p', 'Published'),
+        ('w', 'Withdrawn'),
+    ])
+
+    def __str__(self):
+        return self.title
 
 # The model will be classes to display the data such as prices for the users
 # then allow them to set track status for the currencies
