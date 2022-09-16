@@ -10,7 +10,10 @@ from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
 from . import *
+# from django.contrib.auth.models import User
 
+# from django.contrib.contenttypes.models import ContentType
+# from django.shortcuts import get_object_or_404
 # To protect the website from being emmbed
 
 
@@ -59,7 +62,8 @@ def logIn(request):
         pwd = request.POST.get('pwd')
         userCheck = User.objects.get(userName=uname)
         if (userCheck.userName == uname) and (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
-            request.session['user'] = uname
+            # request.session['user'] = uname
+            login(request,)
             return redirect('/mycrypt/home/')
         else:
             return HttpResponse('Please enter valid userName or passWord.')
