@@ -1,17 +1,30 @@
-{% extends 'mycrypt/home.html' %}
-{% block title %}Login{% endblock %}
-
-{% block body %}
-    <h2>Login</h2>
-
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../static/mycrypt/style2.css">
+</head>
+<body>
+<div class="header">
+    <h1>MyCrypt</h1>
+</div>
+<div class="container">
+    <h1>Login</h1>
     <form method="POST">
         {% csrf_token %}
+        <h2>USERNAME</h2>
         <input type="text" name="uname" placeholder="User Name">
         <br><br>
         <input type="password" name="pwd" placeholder="Password">
         <br><br>
         <input type="submit" name="submit" value="Login">
     </form>
+</div>
 
 
-{% endblock %}
+
+<div class="footer">
+    <h1>mycrypt</h1>
+</div>
+
+</body>
+</html>

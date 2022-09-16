@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
   <head>
     <title>{% block title %}{% endblock %}</title>
     <script
@@ -41,3 +42,83 @@
     <div id="chartContainer" style="height: 500px; width: 100%"></div>
   </body>
 </html>
+=======
+<head>
+<link rel="stylesheet" href="../../static/mycrypt/style.css">
+<link rel="icon" href="../../images/Logo.png">
+<title>MyCrypt</title>
+
+</head>
+<section class="header">
+
+
+    <nav>
+      <img src="/Users/johnpham/Documents/Mycrypt/images/Logo.png" alt="LOGO" width="100px">
+      <h1 class="logo" >MyCrypt</h1>
+      <div class="nav-link" id="navlink">
+        <ul>
+            <li><a href="home.html" style="color:#FFFFFB">Cyrptocurrencies</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+              <button class="nav-button" a href="{% url 'mycrypt:login' %}">Login</a></button>
+              <br>
+              <button class="nav-button" a href="{% url 'mycrypt:signup' %}">Sign Up</a></button>
+            </div>
+        </ul>
+      </div>
+    </nav>
+</section>
+<body>
+<div class="forgot">
+
+
+    <div class="container-home">
+
+      <div class="cont-head">
+        <input type="text" placeholder="Search..">
+        <h1>Cyrptocurrencies</h1>
+
+      </div>
+        <br><br>
+        <table class="crypt-table">
+          <tbody>
+            <tr>
+              <th colspan="2">COIN</th>
+              <th>LAST HR</th>
+              <th>RATE</th>
+            <tr data-coin="btc">
+              <td>
+                <img src="/Users/johnpham/Documents/Mycrypt/mycrypt/templates/mycrypt/images/Ramen.png" width="125px">
+              </td>
+            <td>
+                <span>
+                  BTC
+                  <br>
+                </span>
+                <span>"bitcoin"</span>
+            </td>
+            <td>"0.08%"
+                  </span>
+            </td>
+            <td>$10,000.00</td>
+          </tr>
+      
+          </tbody>
+        
+        </table>
+    </div>
+</div>
+
+
+<div class="footer">
+
+    <h1><img src="/Users/johnpham/Documents/Mycrypt/mycrypt/templates/mycrypt/images/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+    <p>Learn how to purchase and manage Cyrptocurrency</p>
+</div>
+
+
+
+
+</body>
+</html>
+>>>>>>> 52cfd27 (implement home page and forget password page)
