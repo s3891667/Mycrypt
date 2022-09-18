@@ -1,5 +1,5 @@
-{% extends 'mycrypt/home.html' %}
-{% block title %}Sing Up{% endblock %}
+{% extends 'mycrypt/index.html' %}
+{% block title %}Sign Up{% endblock %}
 
 {% block body %}
     <h2>Sign Up</h2>
@@ -23,20 +23,3 @@
     </form>
 
 {% endblock %}
-<h1>My crypt</h1>
-
-<a href="#">Home</a>
-<span>/</span>
-
-{% if current_user %}
-<a href="{% url 'mycrypt:logout' %}">Logout</a>
-<hr />
-<h2>Welcome <span style="color: dodgerblue">{{current_user}}</span>!</h2>
-{% else %}
-<a href="{% url 'mycrypt:login' %}">Login</a>
-<span>/</span>
-<a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-<hr />
-<h2>Login to access this website!</h2>
-{% endif %} {% block body %}{% endblock %}
-</body>

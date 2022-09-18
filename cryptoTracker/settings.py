@@ -136,7 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
-#     'userena.backends.UserenaAuthenticationBackend',
-#     'guardian.backends.ObjectPermissionBackend',
+    #     'userena.backends.UserenaAuthenticationBackend',
+    #     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )

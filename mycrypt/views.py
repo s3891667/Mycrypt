@@ -1,3 +1,4 @@
+from this import d
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
@@ -55,20 +56,24 @@ def signUp(request):
     else:
         return render(request, 'mycrypt/signup.html')
 
-
 def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
         userCheck = User.objects.get(userName=uname)
         if (userCheck.userName == uname) and (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
-            # request.session['user'] = uname
-            login(request,)
+            request.session['user'] = uname
+            request.session.set_expiry(300)
             return redirect('/mycrypt/home/')
         else:
             return HttpResponse('Please enter valid userName or passWord.')
     return render(request, 'mycrypt/login.html')
 
+def learn(request):
+    return render(request,'mycrypt/learn.html' )
+
+def watchlist(request):
+    return render(request, 'mycrypt/watchlist.html')
 
 def logOut(request):
     try:
