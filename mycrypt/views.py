@@ -63,7 +63,6 @@ def logIn(request):
         userCheck = User.objects.get(userName=uname)
         if (userCheck.userName == uname) and (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
             request.session['user'] = uname
-            request.session.set_expiry(300)
             return redirect('/mycrypt/home/')
         else:
             return HttpResponse('Please enter valid userName or passWord.')

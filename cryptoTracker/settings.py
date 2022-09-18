@@ -140,3 +140,6 @@ AUTHENTICATION_BACKENDS = (
     #     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
+SESSION_COOKIE_AGE = 60 * 60

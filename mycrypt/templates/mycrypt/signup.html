@@ -1,25 +1,47 @@
-{% extends 'mycrypt/index.html' %}
+{% extends 'mycrypt/home.html' %}
+
 {% block title %}Sign Up{% endblock %}
 
-{% block body %}
-    <h2>Sign Up</h2>
-
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="uname" placeholder="Username">
-        <br><br>
-        <input type="password" name="pwd" placeholder="Password">
-        <br><br>
-        <input type="password" name="pwd2" placeholder="Confirm Password">
-        <br><br> 
-        <label for="role">Who are you ?</label>
-        <br><br>
-        <select name="role" id="" >
-            <option value="investor">Investor/Professional</option>
-            <option value="normal">Casual User</option>
-        </select>
-        <br><br>
-        <input type="submit" name="submit" value="Sign Up">
-    </form>
-
+{% block function %} 
 {% endblock %}
+{%block content %}
+
+<div class="forgot">
+    
+    <div class="container">
+        <h1>Sign up</h1>
+        <br><br>
+        <form method="POST">
+                {% csrf_token %}
+                <h2>Username</h2>
+                <input class="input" type="text" name="uname">
+                <br><br>
+                <h2>Email</h2>
+                <input class="input" type="Email" name="email">
+                <br><br>
+                <h2>Password</h2>
+                <input class="input" type="password" name="pwd" >
+                <br><br>
+                <h2>Confirm Password</h2>
+                
+                <input class="input" type="Conpassword" name="pwd2" >
+                <br><br>
+                <h2>Who are you ?</h2>
+                <select class="input" name="role" id="" >
+                    <option value="investor">Investor/Professional</option>
+                    <option value="normal">Casual User</option>
+                </select>
+                <br><br>
+                <input class="button" type="submit" name="Register" value="Register">
+                
+                <br><br>
+                <h3><a href="{% url 'mycrypt:login' %}"> Or login</h3>
+                <br><br>
+                </form>
+            </div>
+        </div>
+{% endblock %}
+    
+    
+    
+    

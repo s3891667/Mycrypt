@@ -1,17 +1,33 @@
-{% extends 'mycrypt/index.html' %} 
+{% extends 'mycrypt/home.html' %} 
 {% block title %}Login{% endblock %} 
-{% block body %}
-<div class="container">
-  <h2>Login</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <label for="username">User Name</label>
-    <input type="text" name="uname" placeholder="User Name" />
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="pwd" placeholder="Password" />
-    <br>
-    <input type="submit" name="submit" value="Login" />
-  </form>
+{% block function %} 
+{% endblock %}
+{% block content %}
+<div class="forgot">
+    <div class="container">
+        <h1>Login</h1>
+        <br><br>
+        <form method="POST">
+          {% csrf_token %}
+            <h2>Username or Email</h2>
+            <input class="input" type="text" name="uname">
+            <br><br>
+            <h2>Password</h2>
+            <input class="input" type="password" name="pwd" >
+            <br><br>
+            <input class="button" type="submit" name="submit" value="Submit">
+            <br><br>
+            <h3><a href="{% url 'mycrypt:signup' %}">Register ?</a> </h3>
+            <br><br>
+        </form>
+    </div>
 </div>
 {% endblock %}
+
+
+
+
+
+
+
+
