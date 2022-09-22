@@ -12,34 +12,34 @@
         <h1>Sign up</h1>
         <br><br>
         <form method="POST">
-                {% csrf_token %}
-                <h2>Username</h2>
-                <input class="input" type="text" name="uname">
-                <br><br>
-                <h2>Email</h2>
-                <input class="input" type="Email" name="email">
-                <br><br>
-                <h2>Password</h2>
-                <input class="input" type="password" name="pwd" >
-                <br><br>
-                <h2>Confirm Password</h2>
-                
-                <input class="input" type="Conpassword" name="pwd2" >
-                <br><br>
-                <h2>Who are you ?</h2>
-                <select class="input" name="role" id="" >
-                    <option value="investor">Investor/Professional</option>
-                    <option value="normal">Casual User</option>
-                </select>
-                <br><br>
-                <input class="button" type="submit" name="Register" value="Register">
-                
-                <br><br>
-                <h3><a href="{% url 'mycrypt:login' %}"> Or login</h3>
-                <br><br>
-                </form>
-            </div>
-        </div>
+            {% csrf_token %}
+            <h2>Username</h2>
+            <input class="input" type="text" name="uname">
+            <br><br>
+            <h2>Email</h2>
+            <input class="input" type="Email" name="email">
+            <br><br>
+            <h2>Password</h2>
+            <input class="input" type="password" name="pwd" >
+            <br><br>
+            <h2>Confirm Password</h2>
+            
+            <input class="input" type="Conpassword" name="pwd2" >
+            <br><br>
+            <h2>Who are you ?</h2>
+            <select class="input" name="role" id="" >
+                <option value="investor">Investor/Professional</option>
+                <option value="normal">Casual User</option>
+            </select>
+            <br><br>
+            <input class="button" type="submit" name="Register" value="Register">
+            
+            <br><br>
+            <h3><a href="{% url 'mycrypt:login' %}"> Or login</h3>
+            <br><br>
+        </form>
+    </div>
+</div>
 {% endblock %}
     
     

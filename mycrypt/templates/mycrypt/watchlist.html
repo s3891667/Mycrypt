@@ -1,114 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>watchlist</title>
 
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
-    <link rel="stylesheet" href="../../static/mycrypt/style2.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
+    <link rel="stylesheet" href="../../static/mycrypt/style2.css" />
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-        <div class="container">
+      <div class="container">
         <a href="#" class="navbar-brand">
-          <img src="../../static/mycrypt/img/logo.png" style="max-width: 30px;" alt="logo">
-          mycrypt</a>
+          <img
+            src="../../static/mycrypt/img/logo.png"
+            style="max-width: 30px"
+            alt="logo"
+          />
+          mycrypt</a
+        >
 
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navmenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Cryptocurrencies</a></li>
-                <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
-                <li class="nav-item"><a class="nav-link text-light" href="#">Watchlist</a></li>
-            </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cryptocurrencies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="learn.html">Learn</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">Watchlist</a>
+            </li>
+          </ul>
         </div>
 
-        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <div
+          class="btn-group-vertical"
+          role="group"
+          aria-label="Vertical button group"
+        >
           <button type="button" class="btn btn-light">Login</button>
-          <button type="button" class="btn btn-light">Register </button>
+          <button type="button" class="btn btn-light">Register</button>
         </div>
-    </div>
+      </div>
     </nav>
 
+    <section class="p-5">
+      <div class="container table-bordered table-responsive">
+        <table class="table table-hover">
+          <caption class="caption-top">
+            watchlist
+          </caption>
 
-    <section class="p-5 ">
-        <div class="container table-bordered table-responsive">
-            <table class="table table-hover">
-                <caption class="caption-top"> watchlist </caption>
-
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Coin</th>
-                    <th scope="col">Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Bitcoin</td>
-                    <td>$23,538.78</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>USD Coin</td>
-                    <td>$1.00</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td >Cardano</td>
-                    <td> $0.52</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                  </tr><tr>
-                    <th scope="row">9</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">10</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">11</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">12</th>
-                  </tr>
-                  
-                </tbody>
-              </table>
-
-        </div>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Coin</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Bitcoin</td>
+              <td>$23,538.78</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>USD Coin</td>
+              <td>$1.00</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Cardano</td>
+              <td>$0.52</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+            </tr>
+            <tr>
+              <th scope="row">7</th>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+            </tr>
+            <tr>
+              <th scope="row">9</th>
+            </tr>
+            <tr>
+              <th scope="row">10</th>
+            </tr>
+            <tr>
+              <th scope="row">11</th>
+            </tr>
+            <tr>
+              <th scope="row">12</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <footer class="p-5 bg-dark text-white text-center">
-        <div class="container">
-            <p class="lead">Copyright &copy; mycrypt 2022</p>
-        </div>
+      <div class="container">
+        <p class="lead">Copyright &copy; mycrypt 2022</p>
+      </div>
     </footer>
 
     <script>
-        $(document).ready(function () {
-            $('#TRawMaterialStorageTable').bootstrapTable('resetView', {height: 349});
+      $(document).ready(function () {
+        $("#TRawMaterialStorageTable").bootstrapTable("resetView", {
+          height: 349,
         });
+      });
     </script>
 
     <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
-</body>
+  </body>
 </html>
