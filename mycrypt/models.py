@@ -7,6 +7,7 @@ from django.conf import settings
 class Coin(models.Model):
     name = models.CharField(max_length=200)
     symbol = models.TextField(default="")
+    logo = models.URLField(max_length=200)
 
     def __str__(self):
         return self.name

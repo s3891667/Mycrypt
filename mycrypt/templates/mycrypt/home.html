@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="../../static/mycrypt/style.css">
 <link rel="icon" href="../../images/Logo.png">
+<link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
 <title>MyCrypt</title>
 <script
   type="text/javascript"
@@ -57,42 +58,66 @@
   <body>
     {% block content %}
     <div class="forgot">
-      
-      
         <div class="container-home">
           
           <div class="cont-head">
             <input type="text" placeholder="Search..">
             <h1>Cyrptocurrencies</h1>
-            
           </div>
           <br><br>
-          <table class="crypt-table">
-            <tbody>
-              <tr>
-                <th colspan="2">COIN</th>
-                <th>LAST HR</th>
-            <th>RATE</th>
-            <tr data-coin="btc">
+          <div class="date">
+            <form method = "POST">
+              {%csrf_token%}
+              <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
+              <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
+              <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+            </form>
+          </div>
+          <br><br>
+          {% for data in icon %}
+              <table class="crypt-table">
+                <tbody>
+                  <tr>
+                    <th colspan="2"></th>
+                    <tr data-coin={{data.symbol}}>
               <td>
-                <img src="../../static/mycrypt/img/Ramen.png" width="125px">
+                <img src="{{data.image}}" width="25px">
               </td>
               <td>
-                <span>
-                  BTC
-                  <br>
-                </span>
-                <span>"bitcoin"</span>
-              </td>
-              <td>"0.08%"
+                <span>{{data.name}}</span>
               </span>
             </td>
-            <td>$10,000.00</td>
-          </tr>
-          
-        </tbody>
-        
+            <td>{{data.current_price}}|</td>
+            {% if period == "24h"%}
+              <td>{{data.price_change_percentage_24h_in_currency}}</td>
+            {% elif period == "7d"%}
+              <td>{{data.price_change_percentage_7d_in_currency}}</td>
+            {% elif period == "14d"%}
+              <td>{{data.price_change_percentage_14d_in_currency}}</td>
+            {% endif %} 
+            {% endfor %}
+          </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a onclick="" class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <img src="../../static/mycrypt/img/Ramen.png" alt="">
     </div>
   </div>
   {% endblock %}
