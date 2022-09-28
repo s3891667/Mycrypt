@@ -1,11 +1,15 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import User
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
-import requests,json
+import requests
+import json
 from . import *
+from chatterbot import ChatBot
+from django.conf import settings
+from django.views.generic import View
 
 
 def coinData(period):
@@ -94,3 +98,39 @@ def logOut(request):
     except:
         return redirect('/login/')
     return redirect('/mycrypt/login/')
+
+class ChatterBotApiView(View):
+    """
+    Provide an API endpoint to interact with ChatterBot.
+    """
+
+    chatterbot = ChatBot(**settings.CHATTERBOT)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Return a response to the statement in the posted data.
+
+        * The JSON data should contain a 'text' attribute.
+        """
+        input_data = json.loads(request.body.decode('utf-8'))
+
+        if 'text' not in input_data:
+            return JsonResponse({
+                'text': [
+                    'The attribute "text" is required.'
+                ]
+            }, status=400)
+
+        response = self.chatterbot.get_response(input_data)
+
+        response_data = response.serialize()
+
+        return JsonResponse(response_data, status=200)
+
+    def get(self, request, *args, **kwargs):
+        """
+        Return data corresponding to the current conversation.
+        """
+        return JsonResponse({
+            'name': self.chatterbot.name
+        })
