@@ -1,11 +1,10 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse
 from .models import User
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
-import requests
-import json
+import requests,json
 from . import *
 
 
@@ -24,7 +23,6 @@ def coinData(period):
 def view_one(request):
     return HttpResponse("Stop doing this !")
 
-
 def index(request):
     if 'user' in request.session:
         return redirect('home/')
@@ -36,6 +34,7 @@ def home(request):
     if 'user' in request.session:
         default_period = "24h"
         current_user = request.session['user']
+        userCheck = User.objects.get(userName=current_user)
         if(request.method == 'POST'):
             if 'period' in request.POST:
                 period = request.POST.get('period')
@@ -43,7 +42,8 @@ def home(request):
         return render(request, 'mycrypt/home.html', {
             'current_user': current_user,
             'icon': coinData(default_period),
-            'period': default_period
+            'period': default_period,
+            'role': userCheck.role
         })
     else:
         return redirect('/mycrypt/login/')
