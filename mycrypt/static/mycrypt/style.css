@@ -176,3 +176,81 @@ h3{
 .ctable img{
     height: 35px;
 }
+.u-image{
+    object-fit: cover;
+    display: block;
+    vertical-align: middle;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.u-align-left{
+    text-align:left;
+}
+.u-section-2{
+    min-height:670px ;
+    background-image: url("/Users/johnpham/Documents/Mycrypt/mycrypt/static/mycrypt/img/background.png");
+    background-position: 50% 50%;
+}
+.u.clearfix:before{
+    content: '';
+    display: table;
+    box-sizing: border-box;
+}
+.u-layout-wrap{
+    width: calc(((100% - 340px) / 2) + 340px);
+    margin: 0 auto 0 0;
+}
+.u-layout{
+    padding:0;
+}
+.u-layout-row{
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: fit-content;
+    max-width: 100%;
+}
+.u-image-1{
+    min-height: 690px;
+    background-image: url("/Users/johnpham/Documents/Mycrypt/mycrypt/static/mycrypt/img/cypto.jpeg");
+    background-position: 50% 50%;
+}
+.u-layout-cell {
+    position: relative;
+    display: flex;
+    background-clip: padding-box;
+    background-origin: padding-box;
+}
+.u-container-layout {
+    position: relative;
+    flex: 1;
+    max-width: 100%;
+    transition-duration: inherit;
+}
+.u-valign-bottom {
+    display: flex;
+    flex-direction: column;
+}
+.u-valign-bottom {
+    justify-content: flex-end;
+}
+.u-section-2 .u-container-layout-1 {
+    padding: 0;
+}
+.u-valign-middle{
+    display: flex;
+    flex-direction: column;
+}
+.u-container-layout-2 {
+    padding: 60px 40px 30px 30px;
+}
+.u-valign-middle {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.u-text-1 {
+    font-weight: 700;
+    font-size: 3.75rem;
+    margin: 0;
+}
