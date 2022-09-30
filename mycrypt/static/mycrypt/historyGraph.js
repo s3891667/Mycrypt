@@ -48,7 +48,7 @@ chart.applyOptions({
   },
 });
 
-fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=1000')
+fetch('https://api.binance.com/api/v3/klines?symbol=ADAUSDT&interval=1d&limit=1000')
   .then(res => res.json())
   .then(data => {
     const cdata = data.map(d => {

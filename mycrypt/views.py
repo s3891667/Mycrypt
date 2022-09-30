@@ -1,12 +1,13 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, JsonResponse
-from .models import User
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from .models import CoinData, User
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
 import requests
 import json
 from . import *
+from django.shortcuts import get_object_or_404
 
 
 def coinData(period):
@@ -23,6 +24,7 @@ def coinData(period):
 @xframe_options_deny
 def view_one(request):
     return HttpResponse("Stop doing this !")
+
 
 def index(request):
     if 'user' in request.session:
@@ -48,6 +50,12 @@ def home(request):
         })
     else:
         return redirect('/mycrypt/login/')
+
+
+def coins(request):
+    param = {'current_user': request.session['user'],
+             }
+    return render(request, 'mycrypt/coins.html', param)
 
 
 def signUp(request):
@@ -78,6 +86,8 @@ def logIn(request):
             return redirect('/mycrypt/home/')
         else:
             return HttpResponse('Please enter valid userName or passWord.')
+    if 'user' in request.session:
+        return redirect('/mycrypt/home/')
     return render(request, 'mycrypt/login.html')
 
 
@@ -91,9 +101,7 @@ def watchlist(request):
 
 def logOut(request):
     try:
-        del request.session['user']
+        del request.session
     except:
         return redirect('/login/')
     return redirect('/mycrypt/login/')
-
-

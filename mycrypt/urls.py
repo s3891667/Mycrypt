@@ -1,5 +1,4 @@
 from django.urls import path
-
 from . import views
 app_name = 'mycrypt'
 urlpatterns = [
@@ -10,4 +9,5 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('learn/', views.learn, name='learn'),
     path('watchlist/', views.watchlist, name='watchlist'),
+    path('coins/',views.coins, name='coins'),
 ]
