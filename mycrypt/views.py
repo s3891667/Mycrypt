@@ -22,7 +22,7 @@ def coinData(period):
         output.extend(parse_json)
     return output
 
-
+hiiii
 @xframe_options_deny
 def view_one(request):
     return HttpResponse("Stop doing this !")
