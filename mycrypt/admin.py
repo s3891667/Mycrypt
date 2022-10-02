@@ -1,7 +1,6 @@
 from django.contrib import admin, messages
 from .models import *
 from django.utils.translation import ngettext
-from django.contrib.auth import get_permission_codename
 
 
 admin.site.register(User)

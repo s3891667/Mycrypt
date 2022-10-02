@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="../../static/mycrypt/style.css">
-    <link rel="icon" href="../../images/Logo.png">
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mycrypt/style.css' %}">
+    <link rel="stylesheet" href="{% static 'mycrypt/bootstrap.css' %}">
     <title>MyCrypt</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
+<!-- <script
   defer
   type="text/javascript"
   src="../../static/mycrypt/realTimeGraph.js"
-></script>
+></script> -->
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 <script>
   function myfunc(val) {
@@ -21,7 +21,7 @@
 </head>
 <section class="header">
   <nav>
-    <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
+    <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
     <h1 class="logo" >MyCrypt</h1>
     <div class="nav-link" id="navlink">
       
@@ -79,8 +79,9 @@
                     <img src="{{data.image}}" width="25px">
                   </td>
                   <td>
-                    <a href="{% url 'mycrypt:coins' %}">
-                      <span onclick="myfunc(this)" >{{data.symbol}}</span>
+                    <a href="{% url 'mycrypt:coins' coin_name=data.name %}">
+                      {{data.symbol}}
+                      <!-- <span onclick="myfunc(this)" >{{data.symbol}}</span> -->
                     </a>
                     </td>
                     <td>{{data.current_price}}|</td>
@@ -118,7 +119,7 @@
   </div>
   {% endblock %}
   <div class="footer">
-    <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+    <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
     <p>Learn how to purchase and manage Cyrptocurrency</p>
   </div>
 </body>

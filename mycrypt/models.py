@@ -1,35 +1,31 @@
-# from urllib import response
-from secrets import choice
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 
 class Coin(models.Model):
+    symbol = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=200)
-    symbol = models.TextField(default="")
-    logo = models.URLField(max_length=200)
 
     def __str__(self):
         return self.name
 
 
-class CoinData(models.Model):
-    coin = models.ForeignKey(Coin, on_delete=models.CASCADE)
-    price = models.FloatField(default=0)
-    priceDate = models.DateField('datefield')
-    numExchange = models.IntegerField(default=0)
-
-    def __str__(self):
-        return str(self.price)
-
-
 class User(models.Model):
+    id = models.AutoField(primary_key=True)
     userName = models.CharField(max_length=30)
     passWord = models.CharField(max_length=50)
     role = models.CharField(max_length=30)
+    email = models.EmailField(max_length=254)
+    coin = models.ManyToManyField(Coin)
 
-    def __str__(self):
+    def getName(self):
         return self.userName
+
+    def getRole(self):
+        return self.role
+
+    def getFavorite(self):
+        return self.coin
 
 
 class Content(models.Model):

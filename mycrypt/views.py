@@ -1,20 +1,22 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .models import CoinData, User
+from django.http import HttpResponse
+from django.contrib.sessions.backends.base import *
+from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
 import requests
 import json
 from . import *
-from django.shortcuts import get_object_or_404
+from .models import User
 
 
 def coinData(period):
     output = []
     for i in range(1, 3):
         response_API = requests.get(
-            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + str(i) + '&sparkline=false&price_change_percentage=' + period)
+            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page='
+            + str(i) + '&sparkline=false&price_change_percentage=' + period)
         data = response_API.text
         parse_json = json.loads(data)
         output.extend(parse_json)
@@ -52,7 +54,7 @@ def home(request):
         return redirect('/mycrypt/login/')
 
 
-def coins(request):
+def coins(request,coin_name):
     param = {'current_user': request.session['user'],
              }
     return render(request, 'mycrypt/coins.html', param)
@@ -63,11 +65,9 @@ def signUp(request):
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
         rl = request.POST.get('role')
-        pwd2 = request.POST.get('pwd2')
         if User.objects.filter(userName=uname).count() > 0:
-            return HttpResponse('userName already exists.')
-        if pwd != pwd2:
-            return HttpResponse('passWord does not match.')
+            return render(request, 'mycrypt/signup.html', {
+                'message': "The account has been registered"})
         else:
             user = User(userName=uname, passWord=make_password(pwd), role=rl)
             user.save()
@@ -91,8 +91,18 @@ def logIn(request):
     return render(request, 'mycrypt/login.html')
 
 
+def forgot(request):
+    if request.method == 'POST':
+        send_mail(
+            'Forgot password',
+            'Message',
+            fail_silently=False,
+        )
+    return render(request, 'mycrypt/forgot.html')
+
+
 def learn(request):
-    return render(request, 'mycrypt/learn.html/')
+    return render(request, 'mycrypt/learn.html')
 
 
 def watchlist(request):
@@ -101,7 +111,7 @@ def watchlist(request):
 
 def logOut(request):
     try:
-        del request.session
+        request.session.flush()
     except:
         return redirect('/login/')
     return redirect('/mycrypt/login/')

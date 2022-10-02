@@ -7,10 +7,12 @@ const chartProperties2 = {
         secondsVisible: false,
     }
 }
+
 const dom2 = document.getElementById('stock2');
 const chart2 = LightweightCharts.createChart(dom2, chartProperties2);
 const candleSeries2 = chart2.addCandlestickSeries();
 const currentLocale2 = window.navigator.languages[0];
+
 var value = window.localStorage.getItem("coin");
 var value2 = value.toUpperCase();
 var url = `https://api.binance.com/api/v3/klines?symbol=${value2}USDT&interval=1m&limit=1000`;
