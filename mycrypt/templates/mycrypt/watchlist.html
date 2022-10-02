@@ -8,20 +8,85 @@
     <title>watchlist</title>
 
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
-    <link rel="stylesheet" href="../../static/mycrypt/style2.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-      <div class="container">
-        <a href="#" class="navbar-brand">
-          <img
-            src="../../static/mycrypt/img/logo.png"
-            style="max-width: 30px"
-            alt="logo"
-          />
-          mycrypt</a
-        >
 
+    <link rel="stylesheet" href="../../static/mycrypt/style.css">
+    <link rel="icon" href="../../images/Logo.png">
+    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
+    <title>MyCrypt</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+  defer
+  type="text/javascript"
+  src="../../static/mycrypt/realTimeGraph.js"
+></script>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+  function myfunc(val) {
+    window.localStorage.setItem('coin',val.innerHTML);
+  }
+</script>
+  </head>
+  
+  <body>
+
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <section class="header fixed">
+=======
+    <section class="header">
+>>>>>>> 3d78a2e (merge)
+      <nav>
+        <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
+        <h1 class="logo" >MyCrypt</h1>
+        <div class="nav-link" id="navlink">
+          
+          <ul>
+<<<<<<< HEAD
+            <li><a href="{% url 'mycrypt:home' %}" >Cyrptocurrencies</a></li>
+            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
+            <li><a href="{% url 'mycrypt:watchlist'%}" style="color:#FFFFFB">Watchlist</a></li>
+            {% block function %}
+            {% if current_user %} 
+=======
+            <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
+            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
+            <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
+            {% block function %}
+            {% if current_user %}
+>>>>>>> 3d78a2e (merge)
+            <button class="nav-button">
+              <a href="{%url 'mycrypt:logout'%}">Logout</a>
+            </button>
+                <br>
+                {% else %}
+                <button class="nav-button">
+                  <a href="{% url 'mycrypt:login' %}">Login</a>
+                </button>
+                <button class="nav-button" >
+                  <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
+                </button>
+                {% endif %}
+                {% endblock %}
+              </div>
+            </ul>
+          </div>
+        </nav>
+      </section>
+<<<<<<< HEAD
+      {% block content %}
+      <div class="date">
+        <form method = "POST">
+          {%csrf_token%}
+          <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
+          <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
+          <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+        </form>
+      </div>
+=======
+>>>>>>> 4f7d36c (merge)
         <button
           class="navbar-toggler"
           data-bs-toggle="collapse"
@@ -54,6 +119,12 @@
         </div>
       </div>
     </nav>
+<<<<<<< HEAD
+=======
+>>>>>>> 4902a8d (test)
+=======
+>>>>>>> 3d78a2e (merge)
+>>>>>>> 4f7d36c (merge)
 
     <section class="p-5">
       <div class="container table-bordered table-responsive">
@@ -105,11 +176,10 @@
     
     {% endblock %}
 
-    <footer class="p-5 bg-dark text-white text-center">
-      <div class="container">
-        <p class="lead">Copyright &copy; mycrypt 2022</p>
-      </div>
-    </footer>
+    <div class="footer">
+      <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+      <p>Learn how to purchase and manage Cyrptocurrency</p>
+    </div>
     <script>
       $(document).ready(function () {
         $("#TRawMaterialStorageTable").bootstrapTable("resetView", {
