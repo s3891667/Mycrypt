@@ -30,8 +30,8 @@
         <div class="nav-link" id="navlink">
           
           <ul>
-            <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
-            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
+            <li><a href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
+            <li><a href="{% url 'mycrypt:learn' %}" style="color:#FFFFFB">Learn</a></li>
             <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
             {% block function %}
             {% if current_user %}
@@ -271,6 +271,7 @@
     <div class="footer">
       <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
       <p>Learn how to purchase and manage Cyrptocurrency</p>
+      <p class="lead">Copyright &copy; mycrypt 2022</p>
     </div>
     <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
   </body>

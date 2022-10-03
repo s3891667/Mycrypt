@@ -106,7 +106,22 @@ def learn(request):
 
 
 def watchlist(request):
-    return render(request, 'mycrypt/watchlist.html')
+    if 'user' in request.session:
+        default_period = "24h"
+        current_user = request.session['user']
+        userCheck = User.objects.get(userName=current_user)
+        if(request.method == 'POST'):
+            if 'period' in request.POST:
+                period = request.POST.get('period')
+                default_period = period
+        return render(request, 'mycrypt/watchlist.html', {
+            'current_user': current_user,
+            'icon': coinData(default_period),
+            'period': default_period,
+            'role': userCheck.role
+        })
+    else:
+        return render(request, 'mycrypt/watchlist.html')
 
 
 def logOut(request):
