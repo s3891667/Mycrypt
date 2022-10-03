@@ -1,33 +1,68 @@
-{% extends 'mycrypt/home.html' %} 
-{% block title %}Login{% endblock %} 
-{% block function %} 
-{% endblock %}
-{% block content %}
+
+<head>
+    <head>
+        <link rel="stylesheet" href="../../static/mycrypt/Login.css">
+    <link rel="icon" href="/Users/johnpham/Documents/Mycrypt/mycrypt/templates/mycrypt/images/Ramen.png">
+    <title>MyCrypt</title>
+    
+    <section class="header">
+
+
+        <nav>
+          <img src="/Users/johnpham/Documents/Mycrypt/mycrypt/templates/mycrypt/images/Ramen.png" alt="LOGO" width="75px">
+          <h1 class="logo" >MyCrypt</h1>
+          <div class="nav-link" id="navlink">
+            <ul>
+                <li><a href="home.html" style="color:#FFFFFB">Cyrptocurrencies</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                  <button class="nav-button" a href="login.html">Login</a></button>
+                  <br>
+                  <button class="nav-button" href="signup.html">Sign Up</a></button>
+                </div>
+            </ul>
+          </div>
+        </nav>
+    </section>
+<body>
 <div class="forgot">
+
     <div class="container">
         <h1>Login</h1>
         <br><br>
         <form method="POST">
-          {% csrf_token %}
             <h2>Username or Email</h2>
             <input class="input" type="text" name="uname">
             <br><br>
             <h2>Password</h2>
             <input class="input" type="password" name="pwd" >
+        
+
+        
             <br><br>
-            <input class="button" type="submit" name="submit" value="Submit">
+            <div class="svg-wrapper" type="submit" name="Submit" value="Submit"">
+                <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                  <rect id="shape" height="40" width="150" />
+                  <div id="text">
+                    <a href="home.html"><span class="spot"></span>Submit</a>
+                  </div>
+                </svg>
+              </div>
+            
             <br><br>
-            <h3><a href="{% url 'mycrypt:signup' %}">Register ?</a> </h3>
+            <h3><a href="signup.html"> Register?</h3>
             <br><br>
         </form>
     </div>
 </div>
-{% endblock %}
+
+
+<div class="footer">
+    <h1><img src="/Users/johnpham/Documents/Mycrypt/mycrypt/templates/mycrypt/images/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+    <p>Learn how to purchase and manage Cyrptocurrency</p>
+</div>
 
 
 
-
-
-
-
-
+</body>
+</html>
