@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
 
     <link rel="stylesheet" href="../../static/mycrypt/style.css">
+    <link rel="stylesheet" href="../../static/mycrypt/style2.css">
     <link rel="icon" href="../../images/Logo.png">
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
     <title>MyCrypt</title>
@@ -26,6 +27,8 @@
     window.localStorage.setItem('coin',val.innerHTML);
   }
 </script>
+
+
   </head>
   
   <body>
@@ -80,6 +83,7 @@
           
           <thead>
             <tr>
+              <th scope="col">Like</th>
               <th scope="col">#</th>
               <th scope="col">Coin</th>
               <th scope="col">Price</th>
@@ -90,6 +94,9 @@
           {% for data in icon %}
           <tbody>
             <tr>
+              <td>
+                <div class="heart-like-button"></div>
+              </td>
               <td>
                     <img src="{{data.image}}" width="25px">
                   </td>
@@ -126,6 +133,18 @@
         $("#TRawMaterialStorageTable").bootstrapTable("resetView", {
           height: 349,
         });
+      });
+    </script>
+
+    <script>
+            const button = document.querySelector(".heart-like-button");
+
+      button.addEventListener("click", () => {
+        if (button.classList.contains("liked")) {
+          button.classList.remove("liked");
+        } else {
+          button.classList.add("liked");
+        }
       });
     </script>
 
