@@ -6,53 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>learn</title>
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
-
-    <link rel="stylesheet" href="../../static/mycrypt/style.css">
-    <link rel="icon" href="../../images/Logo.png">
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
-    <title>MyCrypt</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-  defer
-  type="text/javascript"
-  src="../../static/mycrypt/realTimeGraph.js"
-></script>
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-
+    <link rel="stylesheet" href="../../static/mycrypt/style2.css" />
   </head>
   <body>
-    <section class="header">
-      <nav>
-        <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
-        <h1 class="logo" >MyCrypt</h1>
-        <div class="nav-link" id="navlink">
-          
-          <ul>
-            <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
-            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
-            <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
-            {% block function %}
-            {% if current_user %}
-            <button class="nav-button">
-              <a href="{%url 'mycrypt:logout'%}">Logout</a>
-            </button>
-                <br>
-                {% else %}
-                <button class="nav-button">
-                  <a href="{% url 'mycrypt:login' %}">Login</a>
-                </button>
-                <button class="nav-button" >
-                  <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-                </button>
-                {% endif %}
-                {% endblock %}
-              </div>
-            </ul>
-          </div>
-        </nav>
-      </section>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+          <img src="../../static/mycrypt/img/logo.png" style="max-width: 30px;" alt="logo">
+          mycrypt</a>
+
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cryptocurrencies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">Learn</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="watchlist.html">Watchlist</a></li>
+          </ul>
+        </div>
+
+        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+          <button type="button" class="btn btn-light">Login</button>
+          <button type="button" class="btn btn-light">Register </button>
+        </div>
+      </div>
+    </nav>
 
     <section class="p-5 bg-white text-dark text-center text-sm-start">
       <div class="container">
@@ -269,6 +257,7 @@
     </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -279,11 +268,14 @@
     </div>
 =======
 >>>>>>> 4f7d36c (merge)
+=======
+>>>>>>> e5b1cb9 (implement reset pass with email)
     <footer class="p-5 bg-dark text-white text-center">
       <div class="container">
         <p class="lead">Copyright &copy; mycrypt 2022</p>
       </div>
     </footer>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 4902a8d (test)
@@ -294,6 +286,8 @@
     </div>
 >>>>>>> 3d78a2e (merge)
 >>>>>>> 4f7d36c (merge)
+=======
+>>>>>>> e5b1cb9 (implement reset pass with email)
     <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
   </body>
 </html>

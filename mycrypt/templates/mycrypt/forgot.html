@@ -14,9 +14,14 @@
     <div class="container">
         <h1>Reset Password</h1>
         <br><br>
-        <form method="POST">
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Submit</button>
+          </form>
+        <!-- <form method="POST"> -->
             <!-- add place holder  -->
-            <h2>Username or Email</h2>
+            <!-- <h2>Username or Email</h2>
             <input class="input"  type="text" name="uname">
             <br><br>
             <h2>New Password</h2>
@@ -28,9 +33,9 @@
             <br><br>
             <input class="button" type="submit" name="submit" value="Submit" href="home.html">
             <br><br>
-            <h3><a href="{% url 'mycrypt:login' %}"> Back to Login Page</h3>
-            <br><br>
-        </form>
+            <br><br> -->
+        <!-- </form> -->
+        <h3><a href="{% url 'mycrypt:login' %}"> Back to Login Page</h3>
     </div>
 </div>
 

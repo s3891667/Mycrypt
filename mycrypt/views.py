@@ -1,14 +1,18 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.sessions.backends.base import *
-from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
+from mycrypt.forgot import ForgotForm
 import requests
 import json
 from . import *
 from .models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+from mycrypt.token import *
 
 
 def coinData(period):
@@ -54,7 +58,7 @@ def home(request):
         return redirect('/mycrypt/login/')
 
 
-def coins(request,coin_name):
+def coins(request, coin_name):
     param = {'current_user': request.session['user'],
              }
     return render(request, 'mycrypt/coins.html', param)
@@ -80,25 +84,50 @@ def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        userCheck = User.objects.get(userName=uname)
-        if (userCheck.userName == uname) and (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
-            request.session['user'] = uname
-            return redirect('/mycrypt/home/')
-        else:
-            return HttpResponse('Please enter valid userName or passWord.')
+        if (User.objects.filter(userName=uname).exists()):
+            userCheck = User.objects.get(userName=uname)
+            if (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
+                request.session['user'] = uname
+                return redirect('/mycrypt/home/')
+            return render(request, 'mycrypt/login.html', {"message": "Wrong pass"})
+        return render(request, 'mycrypt/login.html', {"message": "Account does not existed"})
     if 'user' in request.session:
         return redirect('/mycrypt/home/')
     return render(request, 'mycrypt/login.html')
 
 
+def resetPass(request):
+    if request.method == 'POST':
+        account = request.session['account']
+        pwd = request.POST.get('pwd')
+        user = User.objects.get(userName=account)
+        user.passWord = make_password(pwd)
+        user.save()
+        request.session.flush()
+    return render(request, 'mycrypt/reset.html')
+
+
+def link(request, uidb64, token):
+    try:
+        id = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(userName=id)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and tokenGener.check_token(user, token):
+        request.session['account'] = user.userName
+        return redirect('/mycrypt/reset/')
+
+
 def forgot(request):
     if request.method == 'POST':
-        send_mail(
-            'Forgot password',
-            'Message',
-            fail_silently=False,
-        )
-    return render(request, 'mycrypt/forgot.html')
+        form = ForgotForm(request.POST)
+        current_site = get_current_site(request)
+        if form.is_valid():
+            form.send(current_site)
+            return render(request, 'mycrypt/login.html')
+    else:
+        form = ForgotForm()
+    return render(request, 'mycrypt/forgot.html', {'form': form})
 
 
 def learn(request):
