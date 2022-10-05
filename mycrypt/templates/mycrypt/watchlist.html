@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
 
     <link rel="stylesheet" href="../../static/mycrypt/style.css">
+    <link rel="stylesheet" href="../../static/mycrypt/style2.css">
     <link rel="icon" href="../../images/Logo.png">
     <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
     <title>MyCrypt</title>
@@ -26,37 +27,24 @@
     window.localStorage.setItem('coin',val.innerHTML);
   }
 </script>
+
+
   </head>
   
   <body>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
     <section class="header fixed">
-=======
-    <section class="header">
->>>>>>> 3d78a2e (merge)
       <nav>
         <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
         <h1 class="logo" >MyCrypt</h1>
         <div class="nav-link" id="navlink">
           
           <ul>
-<<<<<<< HEAD
             <li><a href="{% url 'mycrypt:home' %}" >Cyrptocurrencies</a></li>
             <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
             <li><a href="{% url 'mycrypt:watchlist'%}" style="color:#FFFFFB">Watchlist</a></li>
             {% block function %}
             {% if current_user %} 
-=======
-            <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
-            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
-            <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
-            {% block function %}
-            {% if current_user %}
->>>>>>> 3d78a2e (merge)
             <button class="nav-button">
               <a href="{%url 'mycrypt:logout'%}">Logout</a>
             </button>
@@ -75,7 +63,6 @@
           </div>
         </nav>
       </section>
-<<<<<<< HEAD
       {% block content %}
       <div class="date">
         <form method = "POST">
@@ -85,46 +72,6 @@
           <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
         </form>
       </div>
-=======
->>>>>>> 4f7d36c (merge)
-        <button
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#navmenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cryptocurrencies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="learn.html">Learn</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">Watchlist</a>
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="btn-group-vertical"
-          role="group"
-          aria-label="Vertical button group"
-        >
-          <button type="button" class="btn btn-light">Login</button>
-          <button type="button" class="btn btn-light">Register</button>
-        </div>
-      </div>
-    </nav>
-<<<<<<< HEAD
-=======
->>>>>>> 4902a8d (test)
-=======
->>>>>>> 3d78a2e (merge)
->>>>>>> 4f7d36c (merge)
 
     <section class="p-5">
       <div class="container table-bordered table-responsive">
@@ -179,6 +126,7 @@
     <div class="footer">
       <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
       <p>Learn how to purchase and manage Cyrptocurrency</p>
+      <p class="lead">Copyright &copy; mycrypt 2022</p>
     </div>
     <script>
       $(document).ready(function () {
