@@ -1,69 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% load static %}
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>watchlist</title>
-
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
-
-    <link rel="stylesheet" href="../../static/mycrypt/style.css">
-    <link rel="stylesheet" href="../../static/mycrypt/style2.css">
-    <link rel="icon" href="../../images/Logo.png">
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
-    <title>MyCrypt</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% extends 'mycrypt/home.html' %}
+{% block content %}
+{% load static %}
 <script
   defer
   type="text/javascript"
-  src="../../static/mycrypt/realTimeGraph.js"
+  src="{% static 'mycrypt/javaScript/realTimeGraph.js' %}"
 ></script>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 <script>
   function myfunc(val) {
     window.localStorage.setItem('coin',val.innerHTML);
   }
-</script>
-
-
-  </head>
-  
-  <body>
-
-    <section class="header fixed">
-      <nav>
-        <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
-        <h1 class="logo" >MyCrypt</h1>
-        <div class="nav-link" id="navlink">
-          
-          <ul>
-            <li><a href="{% url 'mycrypt:home' %}" >Cyrptocurrencies</a></li>
-            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
-            <li><a href="{% url 'mycrypt:watchlist'%}" style="color:#FFFFFB">Watchlist</a></li>
-            {% block function %}
-            {% if current_user %} 
-            <button class="nav-button">
-              <a href="{%url 'mycrypt:logout'%}">Logout</a>
-            </button>
-                <br>
-                {% else %}
-                <button class="nav-button">
-                  <a href="{% url 'mycrypt:login' %}">Login</a>
-                </button>
-                <button class="nav-button" >
-                  <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-                </button>
-                {% endif %}
-                {% endblock %}
-              </div>
-            </ul>
-          </div>
-        </nav>
-      </section>
-      {% block content %}
+</script> 
       <div class="date">
         <form method = "POST">
           {%csrf_token%}
@@ -90,41 +38,11 @@
               <th scope="col">Price changed</th>
             </tr>
           </thead>
-          
-          {% for data in icon %}
-          <tbody>
-            <tr>
-              <td>
-                <div class="heart-like-button"></div>
-              </td>
-              <td>
-                    <img src="{{data.image}}" width="25px">
-                  </td>
-                  <td>
-                    <a href="{% url 'mycrypt:coins' coin_name=data.name %}">
-                      {{data.symbol}}
-                      <!-- <span onclick="myfunc(this)" >{{data.symbol}}</span> -->
-                    </a>
-                    </td>
-                    <td>{{data.current_price}}</td>
-                    {% if period == "24h"%}
-                    <td>{{data.price_change_percentage_24h_in_currency}}</td>
-                    {% elif period == "7d"%}
-                    <td>{{data.price_change_percentage_7d_in_currency}}</td>
-                    {% elif period == "14d"%}
-                    <td>{{data.price_change_percentage_14d_in_currency}}</td>
-                    {% endif %} 
-            </tr>
-          </tbody>
-          {% endfor %}
         </table>
       </div>
     </section>
-    
-    {% endblock %}
-
     <div class="footer">
-      <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+      <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
       <p>Learn how to purchase and manage Cyrptocurrency</p>
       <p class="lead">Copyright &copy; mycrypt 2022</p>
     </div>
@@ -148,6 +66,5 @@
       });
     </script>
 
-    <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
-  </body>
-</html>
+    <script src=" static 'mycrypt/javaScript/bootstrap.bundle.js' "></script>
+{% endblock %}

@@ -1,13 +1,12 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>{% block title %}{% endblock %}</title>
     <head>
-      <link rel="stylesheet" href="../../static/mycrypt/style.css">
-      <link rel="icon" href="../../images/Logo.png">
-      <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'mycrypt/css/style.css' %}">
+      <link rel="icon" href="{% static 'mycrypt/img/Logo.png' %}">
+      <link rel="stylesheet" href="{% static 'mycrypt/css/bootstrap.css' %}">
       <title>MyCrypt</title>
       <script
         type="text/javascript"
@@ -16,24 +15,12 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
       <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script
-        defer
-        type="text/javascript"
-        src="../../static/mycrypt/historyGraph.js"
-      ></script>
-      <script
-        defer
-        type="text/javascript"
-        src="../../static/mycrypt/realTimeGraph.js"
-      ></script>
-      
-      
       </head>
   </head>
   <body>
     <section class="header">
       <nav>
-        <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
+        <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
         <h1 class="logo" >MyCrypt</h1>
         <div class="nav-link" id="navlink">
           <ul>

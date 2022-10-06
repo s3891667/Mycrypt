@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="../../static/mycrypt/style.css">
-</head>
-<div class="header">
-    
-    <h1 class="logo"><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="75px">MyCrypt</h1>
-
-</div>
-<body>
+{% extends 'mycrypt/home.html' %} 
+{% block content %}
 <div class="forgot">
-
     <div class="container">
         <h1>Reset Password</h1>
         <br><br>
@@ -19,34 +9,7 @@
             {{ form }}
             <button type="submit">Submit</button>
           </form>
-        <!-- <form method="POST"> -->
-            <!-- add place holder  -->
-            <!-- <h2>Username or Email</h2>
-            <input class="input"  type="text" name="uname">
-            <br><br>
-            <h2>New Password</h2>
-            <input class="input" type="password" name="pwd" >
-            <br><br>
-            <h2>Confirm New Password</h2>
-
-            <input class="input" type="Conpassword" name="cpwd" >
-            <br><br>
-            <input class="button" type="submit" name="submit" value="Submit" href="home.html">
-            <br><br>
-            <br><br> -->
-        <!-- </form> -->
         <h3><a href="{% url 'mycrypt:login' %}"> Back to Login Page</h3>
     </div>
 </div>
-
-
-<div class="footer">
-    <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
-    <p>Learn how to purchase and manage Cyrptocurrency</p>
-</div>
-
-
-
-
-</body>
-</html>
+{% endblock %}

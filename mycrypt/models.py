@@ -19,14 +19,8 @@ class User(models.Model):
     coin = models.ManyToManyField(Coin)
     favorite = models.BooleanField(Blank=True)
 
-    def getName(self):
+    def __str__(self):
         return self.userName
-
-    def getRole(self):
-        return self.role
-
-    def getFavorite(self):
-        return self.coin
 
 
 class Content(models.Model):

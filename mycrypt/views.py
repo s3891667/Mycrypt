@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.contrib.sessions.backends.base import *
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
@@ -8,11 +8,12 @@ from mycrypt.forgot import ForgotForm
 import requests
 import json
 from . import *
-from .models import User
+from .models import Content, User
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from mycrypt.token import *
+import datetime
 
 
 def coinData(period):
@@ -58,6 +59,20 @@ def home(request):
         return redirect('/mycrypt/login/')
 
 
+def post(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        source = request.POST.get('url')
+        status = request.POST.get('status')
+        user = request.session['user']
+        date = datetime.datetime.now().date()
+        post = Content(title=title, body=body, source=source,
+                       status=status, author=user, date=date)
+        post.save()
+    return render(request, 'mycrypt/post.html',)
+
+
 def coins(request, coin_name):
     param = {'current_user': request.session['user'],
              }
@@ -68,27 +83,35 @@ def signUp(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
+        pwd2 = request.POST.get('pwd2')
         rl = request.POST.get('role')
-        if User.objects.filter(userName=uname).count() > 0:
+        mail = request.POST.get('email')
+        if User.objects.filter(userName=uname).exists() | User.objects.filter(email=mail).exists():
             return render(request, 'mycrypt/signup.html', {
-                'message': "The account has been registered"})
+                'message': "The account has been registered, please use different Email or user name"})
+        if pwd != pwd2:
+            return render(request, 'mycrypt/signup.html', {
+                'message': 'The password are not the same'})
         else:
-            user = User(userName=uname, passWord=make_password(pwd), role=rl)
+            user = User(userName=uname, passWord=make_password(
+                pwd), role=rl, email=mail)
             user.save()
             return redirect('/mycrypt/login/')
     else:
-        return render(request, 'mycrypt/signup.html')
+        return render(request, 'mycrypt/signup.html',)
 
 
 def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        if (User.objects.filter(userName=uname).exists()):
+        if User.objects.filter(userName=uname).exists():
             userCheck = User.objects.get(userName=uname)
             if (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
                 request.session['user'] = uname
-                return redirect('/mycrypt/home/')
+                return redirect('/mycrypt/home/', {
+                    'user_name': uname,
+                })
             return render(request, 'mycrypt/login.html', {"message": "Wrong pass"})
         return render(request, 'mycrypt/login.html', {"message": "Account does not existed"})
     if 'user' in request.session:
@@ -96,14 +119,17 @@ def logIn(request):
     return render(request, 'mycrypt/login.html')
 
 
-def resetPass(request):
-    if request.method == 'POST':
-        account = request.session['account']
-        pwd = request.POST.get('pwd')
-        user = User.objects.get(userName=account)
-        user.passWord = make_password(pwd)
-        user.save()
-        request.session.flush()
+def resetPass(request, uid64, token):
+    if 'account' in request.session:
+        if request.method == 'POST':
+            account = request.session['account']
+            pwd = request.POST.get('pwd')
+            user = User.objects.get(userName=account)
+            user.passWord = make_password(pwd)
+            user.save()
+            request.session.flush()
+    else:
+        return Http404('This page is restricted !')
     return render(request, 'mycrypt/reset.html')
 
 
@@ -115,7 +141,10 @@ def link(request, uidb64, token):
         user = None
     if user is not None and tokenGener.check_token(user, token):
         request.session['account'] = user.userName
-        return redirect('/mycrypt/reset/')
+        return render(request, 'mycrypt/reset.html', {
+            'uidb64': uidb64, 'token': token,
+            'user': user.userName
+        })
 
 
 def forgot(request):
@@ -131,7 +160,9 @@ def forgot(request):
 
 
 def learn(request):
-    return render(request, 'mycrypt/learn.html')
+    if 'user' in request.session:
+        return render(request, 'mycrypt/learn.html')
+    return redirect('/mycrypt/login/')
 
 
 def watchlist(request):

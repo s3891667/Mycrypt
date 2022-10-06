@@ -1,6 +1,5 @@
 {% extends 'mycrypt/home.html' %} 
 {% block content %}
-
 <form method="POST">
     {% csrf_token %}
     <h2>Password</h2>
@@ -12,6 +11,5 @@
     <input class="input" type="password" name="pwd2" required >
     <br><br>
     <input class="button" type="submit" name="reset" value="reset">
-    
 </form>
 {% endblock %}

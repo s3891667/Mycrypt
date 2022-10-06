@@ -6,7 +6,6 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from mycrypt.token import *
 from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
 from mycrypt.models import User
 from mycrypt.token import *
 
