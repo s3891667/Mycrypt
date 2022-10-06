@@ -17,7 +17,6 @@ class User(models.Model):
     role = models.CharField(max_length=30)
     email = models.EmailField(max_length=254)
     coin = models.ManyToManyField(Coin)
-    favorite = models.BooleanField(Blank=True)
 
     def __str__(self):
         return self.userName
