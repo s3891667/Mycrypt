@@ -11,9 +11,21 @@ from . import *
 from .models import User
 
 
+def coinDataHome(period, page):
+    output = []
+    if page <= 3:
+        response_API = requests.get(
+            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page='
+            + str(page) + '&sparkline=false&price_change_percentage=' + period)
+        data = response_API.text
+        parse_json = json.loads(data)
+        output.extend(parse_json)
+    return output
+
+
 def coinData(period):
     output = []
-    for i in range(1, 3):
+    for i in range(1, 4):
         response_API = requests.get(
             'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page='
             + str(i) + '&sparkline=false&price_change_percentage=' + period)
@@ -37,18 +49,28 @@ def index(request):
 
 def home(request):
     if 'user' in request.session:
-        default_period = "24h"
         current_user = request.session['user']
         userCheck = User.objects.get(userName=current_user)
-        if(request.method == 'POST'):
-            if 'period' in request.POST:
-                period = request.POST.get('period')
+        if (request.method == 'GET'):
+            if 'page' in request.GET:
+                page = int(request.GET.get('page'))
+                default_page = page
+            else:
+                default_page = 1
+            if 'period' in request.GET:
+                period = request.GET.get('period')
                 default_period = period
+            else:
+                default_period = "24h"
+        else:
+            default_period = "24h"
+            default_page = 1
         return render(request, 'mycrypt/home.html', {
             'current_user': current_user,
-            'icon': coinData(default_period),
+            'icon': coinDataHome(default_period, default_page),
             'period': default_period,
-            'role': userCheck.role
+            'role': userCheck.role,
+            'page': default_page
         })
     else:
         return redirect('/mycrypt/login/')

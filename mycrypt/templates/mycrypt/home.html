@@ -17,6 +17,76 @@
   function myfunc(val) {
     window.localStorage.setItem('coin',val.innerHTML);
   }
+  
+  function checkReload() {
+    var reloading = sessionStorage.getItem("reloading");
+      if (reloading) {
+          sessionStorage.removeItem("reloading");
+          var period = sessionStorage.getItem("period")
+          var page = sessionStorage.getItem("page")
+          var searchParams = new URLSearchParams(window.location.search);
+          if (period != null)  {
+            searchParams.set("period", period);
+            sessionStorage.removeItem("period")
+            window.location.search = searchParams.toString();
+          }
+          if (page != null) {
+            searchParams.set("page", page);
+            sessionStorage.removeItem("page")
+            window.location.search = searchParams.toString();
+          }
+      }
+  }
+
+  function reloadPeriod(period) {
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var page = urlParams.get("page");
+      sessionStorage.setItem("period", period)
+      if (page != null) {sessionStorage.setItem("page", page);}
+      sessionStorage.setItem("reloading", "true");
+      document.location.reload();
+  }
+
+  function reloadPageNum(page) {
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var period = urlParams.get("period");
+      sessionStorage.setItem("page", page)
+      if (period != null) {sessionStorage.setItem("period", period);}
+      sessionStorage.setItem("reloading", "true");
+      document.location.reload();
+  }
+
+  function nextPage() {
+    var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var page = parseInt(urlParams.get("page"));
+      if (page<3) {
+        page+=1;
+        sessionStorage.setItem("page", page)
+        sessionStorage.setItem("reloading", "true");
+        document.location.reload();
+      }
+      else if (page>=3) {}
+      else {
+        sessionStorage.setItem("page", 2)
+        sessionStorage.setItem("reloading", "true");
+        document.location.reload();
+      }
+  }
+
+  function lastPage() {
+    var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var page = parseInt(urlParams.get('page'));
+      if (page>1) {
+        page-=1;
+        sessionStorage.setItem("page", page)
+        sessionStorage.setItem("reloading", "true");
+        document.location.reload();
+      }
+  }
 </script>
 </head>
 <section class="header">
@@ -26,7 +96,7 @@
     <div class="nav-link" id="navlink">
       
       <ul>
-        <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
+        <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cryptocurrencies</a></li>
         <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
         <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
         {% block function %}
@@ -49,7 +119,7 @@
       </div>
     </nav>
   </section>
-  <body>
+  <body onload="checkReload();">
     {% block content %}
     <!-- <h1 id="stock2"></h1> -->
     <div class="forgot">
@@ -57,15 +127,14 @@
         
         <div class="cont-head">
           <input type="text" placeholder="Search..">
-          <h1>Cyrptocurrencies</h1>
+          <h1>Cryptocurrencies</h1>
         </div>
           <br><br>
           <div class="date">
-            <form method = "POST">
-              {%csrf_token%}
-              <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
-              <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
-              <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+            <form method = "GET">
+              <button onclick="reloadPeriod('24h');return false" name="period" type="submit">24H</button>
+              <button onclick="reloadPeriod('7d');return false" name="period" type="submit">7D</button>
+              <button onclick="reloadPeriod('14d');return false"name ="period" type="submit">14D</button>
             </form>
           </div>
           <br><br>
@@ -112,24 +181,37 @@
               </table>
             </div>
           </section>
-
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item">
-                    <a onclick="" class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+            <form method="GET">
+              <li class="page-item">
+                <a onclick="lastPage()" class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+            <button class="paginate-button" onclick="reloadPageNum(1);return false" type="submit">
+              <li class="page-item">
+                <a class="page-link">1</a>
+              </li>
+            </button>
+            <button class="paginate-button" onclick="reloadPageNum(2);return false" type="submit">
+              <li class="page-item">
+                <a class="page-link">2</a>
+              </li>
+            </button>
+            <button class="paginate-button" onclick="reloadPageNum(3);return false" type="submit">
+            <li class="page-item">
+              <a class="page-link">3</a>
+            </li>
+            </button>
+            <li class="page-item">
+            <a onclick="nextPage()" class="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>
-          </li>
+            </li>
+          </form>
         </ul>
       </nav>
       <img src="../../static/mycrypt/img/Ramen.png" alt="">
@@ -138,7 +220,7 @@
   {% endblock %}
   <div class="footer">
     <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
-    <p>Learn how to purchase and manage Cyrptocurrency</p>
+    <p>Learn how to purchase and manage Cryptocurrency</p>
     <p class="lead">Copyright &copy; mycrypt 2022</p>
   </div>
 </body>
