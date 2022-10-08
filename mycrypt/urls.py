@@ -13,6 +13,7 @@ urlpatterns = [
     path('watchlist/', views.watchlist, name='watchlist'),
     path('post/', views.post, name='post'),
     path('coins/<str:coin_name>/', views.coins, name='coins'),
+    path('reset/', views.resetPass, name='reset'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,32})/',
         views.link, name='link'),
 ]

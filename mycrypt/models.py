@@ -17,6 +17,7 @@ class User(models.Model):
     role = models.CharField(max_length=30)
     email = models.EmailField(max_length=254)
     coin = models.ManyToManyField(Coin)
+    verified = models.BooleanField()
 
     def __str__(self):
         return self.userName

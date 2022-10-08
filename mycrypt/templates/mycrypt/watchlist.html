@@ -1,12 +1,6 @@
 {% extends 'mycrypt/home.html' %}
 {% block content %}
 {% load static %}
-<script
-  defer
-  type="text/javascript"
-  src="{% static 'mycrypt/javaScript/realTimeGraph.js' %}"
-></script>
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 <script>
   function myfunc(val) {
     window.localStorage.setItem('coin',val.innerHTML);
@@ -51,18 +45,6 @@
         $("#TRawMaterialStorageTable").bootstrapTable("resetView", {
           height: 349,
         });
-      });
-    </script>
-
-    <script>
-            const button = document.querySelector(".heart-like-button");
-
-      button.addEventListener("click", () => {
-        if (button.classList.contains("liked")) {
-          button.classList.remove("liked");
-        } else {
-          button.classList.add("liked");
-        }
       });
     </script>
 

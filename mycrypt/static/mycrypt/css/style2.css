@@ -1,4 +1,4 @@
-.heart-like-button {
+.heart-like-button { 
     position: relative;
     width: 40px;
     height: 35px;
@@ -6,26 +6,26 @@
   .heart-like-button:before {
     position: absolute;
     top: 0;
-    left: 19px;
+    left: 55px;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
     width: 20px;
     height: 31.25px;
     border-radius: 40px 40px 0 0;
-    background-color: #574136;
+    background-color:grey;
     content: "";
     cursor: pointer;
   }
   .heart-like-button:after {
     position: absolute;
     top: 0;
-    left: 0px;
+    left: 35px;
     transform: rotate(45deg);
     transform-origin :100% 100%;
     width: 20px;
     height: 31.25px;
     border-radius: 40px 40px 0 0;
-    background-color: #574136;
+    background-color:grey;
     content: "";
     cursor: pointer;
   }

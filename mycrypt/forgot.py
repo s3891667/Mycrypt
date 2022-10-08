@@ -32,7 +32,7 @@ class ForgotForm(forms.Form):
         name, email = self.get_info()
         user = User.objects.filter(userName=name)
         account = User.objects.get(userName=name)
-        message = render_to_string('mycrypt/link.html', {
+        html_message = render_to_string('mycrypt/link.html', {
             'user': account,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(account.userName)),
@@ -41,7 +41,7 @@ class ForgotForm(forms.Form):
         if user is not None:
             send_mail(
                 subject='Mycrypt verification email',
-                message=message,
+                message=html_message,
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email],
             )

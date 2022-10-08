@@ -20,15 +20,15 @@ const myPriceFormatter = Intl.NumberFormat(currentLocale2, {
 
 
 chart2.timeScale().applyOptions({
-  borderColor: '#71649C',
-  barSpacing: 10,
+    borderColor: '#71649C',
+    barSpacing: 10,
 });
 chart2.applyOptions({
     crosshair: {
         // Change mode from default 'magnet' to 'normal'.
         // Allows the crosshair to move freely without snapping to datapoints
         mode: LightweightCharts.CrosshairMode.Normal,
-        
+
         // Vertical crosshair line (showing Date in Label)
         vertLine: {
             width: 8,
@@ -36,7 +36,7 @@ chart2.applyOptions({
             style: LightweightCharts.LineStyle.Solid,
             labelBackgroundColor: '#9B7DFF',
         },
-        
+
         // Horizontal crosshair line (showing Price in Label)
         horzLine: {
             color: '#9B7DFF',
