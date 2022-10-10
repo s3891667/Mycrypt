@@ -1,130 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>watchlist</title>
-
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css" />
-
-    <link rel="stylesheet" href="../../static/mycrypt/style.css">
-    <link rel="icon" href="../../images/Logo.png">
-    <link rel="stylesheet" href="../../static/mycrypt/bootstrap.css">
-    <title>MyCrypt</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-  defer
-  type="text/javascript"
-  src="../../static/mycrypt/realTimeGraph.js"
-></script>
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+{% extends 'mycrypt/home.html' %}
+{% block content %}
+{% load static %}
 <script>
   function myfunc(val) {
     window.localStorage.setItem('coin',val.innerHTML);
   }
-</script>
-  </head>
-  
-  <body>
-
-    <section class="header">
-      <nav>
-        <img src="../../static/mycrypt/img/logo.png" alt="LOGO" width="100px">
-        <h1 class="logo" >MyCrypt</h1>
-        <div class="nav-link" id="navlink">
-          
-          <ul>
-            <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
-            <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
-            <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
-            {% block function %}
-            {% if current_user %}
-            <button class="nav-button">
-              <a href="{%url 'mycrypt:logout'%}">Logout</a>
-            </button>
-                <br>
-                {% else %}
-                <button class="nav-button">
-                  <a href="{% url 'mycrypt:login' %}">Login</a>
-                </button>
-                <button class="nav-button" >
-                  <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-                </button>
-                {% endif %}
-                {% endblock %}
-              </div>
-            </ul>
-          </div>
-        </nav>
-      </section>
+</script> 
+      <div class="date">
+        <form method = "POST">
+          {%csrf_token%}
+          <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
+          <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
+          <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+        </form>
+      </div>
 
     <section class="p-5">
       <div class="container table-bordered table-responsive">
+
         <table class="table table-hover">
           <caption class="caption-top">
             watchlist
           </caption>
-
+          
           <thead>
             <tr>
+              <th scope="col">Like</th>
               <th scope="col">#</th>
               <th scope="col">Coin</th>
               <th scope="col">Price</th>
+              <th scope="col">Price changed</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Bitcoin</td>
-              <td>$23,538.78</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>USD Coin</td>
-              <td>$1.00</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Cardano</td>
-              <td>$0.52</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-            </tr>
-            <tr>
-              <th scope="row">11</th>
-            </tr>
-            <tr>
-              <th scope="row">12</th>
-            </tr>
-          </tbody>
         </table>
       </div>
     </section>
-
     <div class="footer">
-      <h1><img src="../../static/mycrypt/img/Ramen.png" alt="LOGO" width="50px">mycrypt</h1>
+      <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
       <p>Learn how to purchase and manage Cyrptocurrency</p>
+      <p class="lead">Copyright &copy; mycrypt 2022</p>
     </div>
     <script>
       $(document).ready(function () {
@@ -134,6 +48,5 @@
       });
     </script>
 
-    <script src="../../static/mycrypt/bootstrap.bundle.js"></script>
-  </body>
-</html>
+    <script src=" static 'mycrypt/javaScript/bootstrap.bundle.js' "></script>
+{% endblock %}

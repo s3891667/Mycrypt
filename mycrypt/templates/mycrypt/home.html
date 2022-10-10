@@ -2,29 +2,19 @@
 <html>
   <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'mycrypt/style.css' %}">
-    <link rel="stylesheet" href="{% static 'mycrypt/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'mycrypt/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'mycrypt/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'mycrypt/css/style2.css' %}">
     <title>MyCrypt</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script
-  defer
-  type="text/javascript"
-  src="../../static/mycrypt/realTimeGraph.js"
-></script> -->
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-<script>
-  function myfunc(val) {
-    window.localStorage.setItem('coin',val.innerHTML);
-  }
-</script>
 </head>
 <section class="header">
   <nav>
     <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
     <h1 class="logo" >MyCrypt</h1>
     <div class="nav-link" id="navlink">
-      
       <ul>
         <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
         <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
@@ -34,68 +24,91 @@
         <button class="nav-button">
           <a href="{%url 'mycrypt:logout'%}">Logout</a>
         </button>
-            <br>
-            {% else %}
-            <button class="nav-button">
-              <a href="{% url 'mycrypt:login' %}">Login</a>
-            </button>
+        <br>
+        {% else %}
+        <button class="nav-button">
+          <a href="{% url 'mycrypt:login' %}">Login</a>
+        </button>
+        <button class="nav-button" >
+          <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
+        </button>
+        {% endif %}
+        {% if role == 'investor' %}
+          {% if verified %}
             <button class="nav-button" >
-              <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
+              <a href="{% url 'mycrypt:post' %}">Create post</a>
             </button>
-            {% endif %}
-            {% endblock %}
-          </div>
-        </ul>
+          {% endif %}
+        {% endif %}
+        {% endblock %}
       </div>
-    </nav>
-  </section>
-  <body>
-    {% block content %}
-    <!-- <h1 id="stock2"></h1> -->
-    <div class="forgot">
-      <div class="container-home">
-        
-        <div class="cont-head">
+    </ul>
+  </div>
+</nav>
+</section>
+<body>
+  {% block content %}
+  <div class="forgot">
+    <div class="container-home">
+      
+      <div class="cont-head">
           <input type="text" placeholder="Search..">
           <h1>Cyrptocurrencies</h1>
         </div>
-          <br><br>
-          <div class="date">
-            <form method = "POST">
-              {%csrf_token%}
+        <br><br>
+        <div class="date">
+          <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
+          <form method = "POST">
+            {%csrf_token%}
               <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
               <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
               <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
             </form>
           </div>
           <br><br>
-          {% for data in icon %}
-          <table class="crypt-table">
-            <tbody>
-              <tr>
-                <th colspan="2"></th>
-                <tr data-coin={{data.symbol}}>
-                  <td>
-                    <img src="{{data.image}}" width="25px">
-                  </td>
-                  <td>
-                    <a href="{% url 'mycrypt:coins' coin_name=data.name %}">
-                      {{data.symbol}}
-                      <!-- <span onclick="myfunc(this)" >{{data.symbol}}</span> -->
-                    </a>
+          <section class="p-5">
+            <div class="container table-bordered table-responsive">
+              <table class="table table-hover">
+                
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Coin</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Price changed</th>
+                  </tr>
+                </thead>
+                <!-- <h2>{{userCheck}}</h2> -->
+                {% for data in icon %}
+                <tr>
+                    <td>
+                      <div id="{{data.name}}" class="heart-like-button" onchange="favorite(this)"></div>
                     </td>
-                    <td>{{data.current_price}}|</td>
-                    {% if period == "24h"%}
-                    <td>{{data.price_change_percentage_24h_in_currency}}</td>
-                    {% elif period == "7d"%}
-                    <td>{{data.price_change_percentage_7d_in_currency}}</td>
-                    {% elif period == "14d"%}
-                    <td>{{data.price_change_percentage_14d_in_currency}}</td>
-                    {% endif %} 
-                  </tbody>
-                </table>
-              {% endfor %}
-              <nav aria-label="Page navigation example">
+                    <td>
+                      <img src="{{data.image}}" width="25px">
+                    </td>
+                        <td>
+                        <a href="{% url 'mycrypt:coins' coin_name=data.name %}">
+                          <span id="symbol" onclick="myfunc(this)" >{{data.symbol}}</span>
+                        </a>
+                        </td>
+                        <td id="current_price">{{data.current_price}}$</td>
+                        {% if period == "24h"%}
+                        <td id="price_change" class="value" >{{data.price_change_percentage_24h_in_currency}}</td>
+                        {% elif period == "7d"%}
+                        <td id="price_change" class="value">{{data.price_change_percentage_7d_in_currency}}</td>
+                        {% elif period == "14d"%}
+                        <td id="price_change" class="value">{{data.price_change_percentage_14d_in_currency}}</td>
+                        {% endif %} 
+                  </tr>
+                </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </section>
+
+          <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
                     <a onclick="" class="page-link" href="#" aria-label="Previous">
@@ -114,13 +127,50 @@
           </li>
         </ul>
       </nav>
-      <img src="../../static/mycrypt/img/Ramen.png" alt="">
     </div>
   </div>
+  <script >
+    function myfunc(val) {
+      window.localStorage.setItem('coin',val.innerHTML);
+    };
+
+    for (var i=0; i <200; i++) {
+      data = parseFloat(document.getElementsByClassName('value')[i].innerHTML).toFixed(2);
+      document.getElementsByClassName('value')[i].innerHTML = data.toString() + "%";
+    };
+
+    $(document).ready(function () {
+      $('.heart-like-button').each(function(index) {
+        $(this).on('click', function () {
+          if($(this).hasClass('liked')) {
+            $(this).removeClass('liked');
+          } else {
+            $(this).addClass('liked');
+            var symbol  = $(this).parent().parent().find('#symbol').text();
+            var coinName = $(this).attr('id');
+            $.ajax({
+              name: "favorite",
+              url:  "{% url 'mycrypt:home' %}",
+              type: "POST",
+              data: {
+                'symbol': symbol,
+                'coinName': coinName,
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+              },
+              success: function (response) {},
+              complete: function () {},
+            })
+          }
+        });
+      });
+  });
+
+  </script>
   {% endblock %}
   <div class="footer">
     <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
     <p>Learn how to purchase and manage Cyrptocurrency</p>
+    <p class="lead">Copyright &copy; mycrypt 2022</p>
   </div>
 </body>
 </html>

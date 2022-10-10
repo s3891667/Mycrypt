@@ -13,6 +13,42 @@ const chart2 = LightweightCharts.createChart(dom2, chartProperties2);
 const candleSeries2 = chart2.addCandlestickSeries();
 const currentLocale2 = window.navigator.languages[0];
 
+const myPriceFormatter = Intl.NumberFormat(currentLocale2, {
+    style: "currency",
+    currency: "USD", // Currency for data points
+}).format;
+
+
+chart2.timeScale().applyOptions({
+    borderColor: '#71649C',
+    barSpacing: 10,
+});
+chart2.applyOptions({
+    crosshair: {
+        // Change mode from default 'magnet' to 'normal'.
+        // Allows the crosshair to move freely without snapping to datapoints
+        mode: LightweightCharts.CrosshairMode.Normal,
+
+        // Vertical crosshair line (showing Date in Label)
+        vertLine: {
+            width: 8,
+            color: '#C3BCDB44',
+            style: LightweightCharts.LineStyle.Solid,
+            labelBackgroundColor: '#9B7DFF',
+        },
+
+        // Horizontal crosshair line (showing Price in Label)
+        horzLine: {
+            color: '#9B7DFF',
+            labelBackgroundColor: '#9B7DFF',
+        },
+    },
+    localization: {
+        priceFormatter: myPriceFormatter,
+    },
+});
+
+
 var value = window.localStorage.getItem("coin");
 var value2 = value.toUpperCase();
 var url = `https://api.binance.com/api/v3/klines?symbol=${value2}USDT&interval=1m&limit=1000`;
@@ -32,7 +68,7 @@ const binanceSocket = new WebSocket(
 binanceSocket.onmessage = function (event) {
     const data = JSON.parse(event.data);
     const cdata2 = {
-        time: (data["k"]["t"]) /1000,
+        time: (data["k"]["t"]) / 1000,
         open: data["k"]["o"],
         high: data["k"]["h"],
         low: data["k"]["l"],

@@ -1,16 +1,17 @@
 {% extends 'mycrypt/home.html' %}
-
 {% block title %}Sign Up{% endblock %}
-
 {% block function %} 
 {% endblock %}
 {%block content %}
-
 <div class="forgot">
-    
     <div class="container">
         <h1>Sign up</h1>
         <br><br>
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
             <h2>Username</h2>
@@ -22,7 +23,7 @@
             <h2>Password</h2>
             <input class="input" type="password" title="Must contain at least one number and one uppercase and 
             lowercase letter, and at least 8 or more characters"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="pwd" required] >
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="pwd" required >
             <br><br>
             <h2>Confirm Password</h2>
             
@@ -40,10 +41,6 @@
             <h3><a href="{% url 'mycrypt:login' %}"> Or login</h3>
             <br><br>
         </form>
-        {% if message %}
-            <!-- using bootstrap alert -->
-
-        {% endif %}
     </div>
 </div>
 {% endblock %}

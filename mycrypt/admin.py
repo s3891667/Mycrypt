@@ -21,3 +21,5 @@ class addArticle(admin.ModelAdmin):
 
 
 admin.site.register(Content, addArticle)
+
+admin.site.register(Coin)
