@@ -1,10 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.http import Http404, HttpResponse
 from django.contrib.sessions.backends.base import *
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
-from pymacaroons import Verifier
 from mycrypt.forgot import ForgotForm
 import requests
 import json
@@ -15,6 +15,7 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from mycrypt.token import *
 import datetime
+from django.core.paginator import Paginator
 
 
 def coinData(period):
@@ -53,22 +54,32 @@ def home(request):
             else:
                 symbol = request.POST.get('symbol')
                 coinName = request.POST.get('coinName')
+                coinImg = request.POST.get('coinImg')
                 if not userCheck.coin.filter(name=coinName).exists():
-                    coin = Coin(symbol=symbol, name=coinName)
+                    coin = Coin(symbol=symbol, name=coinName, icon=coinImg)
                     coin.save()
                     userCheck.coin.add(coin)
                     userCheck.save()
+        # Pagination
+        coins = coinData(default_period)
+        paginator = Paginator(coins, 25)
+        page_number = request.GET.get('page')
+        page_object = paginator.get_page(page_number)
         return render(request, 'mycrypt/home.html', {
-            'current_user': current_user,
-            'icon': coinData(default_period),
-            'period': default_period,
-            'role': userCheck.role,
-            'userCheck': userCheck,
-            'verified': userCheck.verified,
+            'current_user': current_user, 'icon': page_object,
+            'period': default_period, 'role': userCheck.role,
+            'userCheck': userCheck, 'verified': userCheck.verified,
+            'favorite': userCheck.coin.values_list('name', flat=True)
         })
     else:
         return redirect('/mycrypt/login/')
 
+def remove(request):
+    if request.method == "POST":
+        name = request.POST.get('coin')
+        delCoin = Coin.objects.get(name=name)
+        delCoin.delete()
+    return redirect('/mycrypt/home/')
 
 def post(request):
     if request.method == 'POST':
@@ -117,10 +128,10 @@ def logIn(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        if User.objects.filter(userName=uname).exists():
-            userCheck = User.objects.get(userName=uname)
-            if (django_pbkdf2_sha256.verify(pwd, userCheck.passWord)):
-                request.session['user'] = uname
+        if User.objects.filter(userName=uname).exists() | User.objects.filter(email=uname).exists():
+            userCheck = User.objects.get(Q(userName=uname) | Q(email=uname))
+            if django_pbkdf2_sha256.verify(pwd, userCheck.passWord):
+                request.session['user'] = userCheck.userName
                 return redirect('/mycrypt/home/', {
                     'user_name': uname,
                 })
@@ -177,7 +188,6 @@ def learn(request):
 
 def watchlist(request):
     if 'user' in request.session:
-        default_period = "24h"
         current_user = request.session['user']
         userCheck = User.objects.get(userName=current_user)
         if(request.method == 'POST'):
@@ -186,12 +196,10 @@ def watchlist(request):
                 default_period = period
         return render(request, 'mycrypt/watchlist.html', {
             'current_user': current_user,
-            'icon': coinData(default_period),
-            'period': default_period,
-            'role': userCheck.role
+            'favorite': userCheck.coin.all()
         })
     else:
-        return render(request, 'mycrypt/watchlist.html')
+        return redirect('/mycrypt/login/')
 
 
 def logOut(request):

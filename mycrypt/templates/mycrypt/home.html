@@ -9,11 +9,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script src="{% static 'mycrypt/javaScript/bootstrap.bundle.js'%}"></script>
+<script defer>
+  $(document).ready(function(){
+    $('#search_bar').on("keyup",function(){
+      var value = $(this).val().toLowerCase();
+      $("#coin_chart tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    })
+  })
+</script>
 </head>
 <section class="header">
   <nav>
     <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
-    <h1 class="logo" >MyCrypt</h1>
+    <h1 class="logo">MyCrypt</h1>
     <div class="nav-link" id="navlink">
       <ul>
         <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
@@ -50,9 +61,8 @@
   {% block content %}
   <div class="forgot">
     <div class="container-home">
-      
       <div class="cont-head">
-          <input type="text" placeholder="Search..">
+          <input id="search_bar" type="text" placeholder="Search..">
           <h1>Cyrptocurrencies</h1>
         </div>
         <br><br>
@@ -79,14 +89,18 @@
                     <th scope="col">Price changed</th>
                   </tr>
                 </thead>
-                <!-- <h2>{{userCheck}}</h2> -->
                 {% for data in icon %}
+                <tbody id="coin_chart">
                 <tr>
                     <td>
-                      <div id="{{data.name}}" class="heart-like-button" onchange="favorite(this)"></div>
+                      {% if data.name in favorite %}
+                      <div id="{{data.name}}" class="heart-like-button liked" ></div>
+                      {% else %}
+                      <div id="{{data.name}}" class="heart-like-button" ></div>
+                      {% endif %}
                     </td>
                     <td>
-                      <img src="{{data.image}}" width="25px">
+                      <img id="img" src="{{data.image}}" width="25px">
                     </td>
                         <td>
                         <a href="{% url 'mycrypt:coins' coin_name=data.name %}">
@@ -107,47 +121,85 @@
               </table>
             </div>
           </section>
-
-          <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a onclick="" class="page-link" href="#" aria-label="Previous">
+          <div class="align-middle">
+            <nav class="Page" aria-label="Page"> 
+              <ul class="pagination">
+                <li class="page_item fast">
+                  <a onclick="" href="?page=1" class="page-link page_switch ">First</a>
+                </li>
+                <li class="page-item">
+                  {% if icon.has_previous %}
+                    <a onclick="" class="page-link page_switch" href="?page={{icon.previous_page_number}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                     </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+                    {% endif %}
+                  </li>
+                  {% for i in icon.paginator.page_range %}
+                  <li class="page-item">
+                    <a onclick="" class="page-link" href="?page={{i}}">{{i}}</a>
+                  </li>
+                  {% endfor %}
+                  <li class="page-item">
+                    {% if icon.has_next %}
+                      <a onclick="" class="page-link page_switch" href="?page={{icon.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    {% endif %}
+                  </li>
+                  <li class="page_item fast">
+                    <a onclick="" href="?page={{icon.paginator.num_pages}}" class="page-link page_switch ">Last</a>
+                  </li>
+                </ul> 
+          </nav> 
+        </div>
+        </a>
+        </div>
+      </div>
   <script >
     function myfunc(val) {
       window.localStorage.setItem('coin',val.innerHTML);
     };
 
-    for (var i=0; i <200; i++) {
+    for (var i=0; i <25; i++) {
       data = parseFloat(document.getElementsByClassName('value')[i].innerHTML).toFixed(2);
       document.getElementsByClassName('value')[i].innerHTML = data.toString() + "%";
     };
 
+    var url = window.location.href
+    var att =  url.split("/").pop()
+    
+
     $(document).ready(function () {
+      $('.page-link').each(function(index){
+        if(att == "" && $(this).attr('href') == "?page=1" && !$(this).parent().hasClass("fast") ) {
+          $(this).parent().addClass('active');
+        }
+        if(att == $(this).attr('href') && !$(this).parent().hasClass("fast")) {
+          $(this).parent().addClass('active').siblings().removeClass('active')
+        }
+      })
       $('.heart-like-button').each(function(index) {
         $(this).on('click', function () {
           if($(this).hasClass('liked')) {
             $(this).removeClass('liked');
+            $.ajax({
+              url: "{% url 'mycrypt:remove' %}",
+              type: "POST",
+              data: {
+                'coin': $(this).attr('id'),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+              },
+              success: function (response) {},
+              complete: function(){},
+            })
+            
           } else {
             $(this).addClass('liked');
-            var symbol  = $(this).parent().parent().find('#symbol').text();
-            var coinName = $(this).attr('id');
+            let symbol  = $(this).parent().parent().find('#symbol').text();
+            let coinName = $(this).attr('id');
+            let img = $(this).parent().parent().find('#img').attr('src');
             $.ajax({
               name: "favorite",
               url:  "{% url 'mycrypt:home' %}",
@@ -155,6 +207,7 @@
               data: {
                 'symbol': symbol,
                 'coinName': coinName,
+                'coinImg': img,
                 'csrfmiddlewaretoken': '{{ csrf_token }}',
               },
               success: function (response) {},
@@ -164,7 +217,6 @@
         });
       });
   });
-
   </script>
   {% endblock %}
   <div class="footer">
