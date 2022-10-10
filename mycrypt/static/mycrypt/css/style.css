@@ -1,68 +1,80 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
-*{
+
+* {
     margin: 0;
 }
-body{
+
+body {
     background: #F5F5F5;
 }
-h1{
+
+h1 {
     font-family: 'Iceberg', cursive;
     font-size: 40px;
 
 }
+
 /* Header/title/logo */
-.header{
-    padding:25px;
-    background: #404E4D;
+.header {
+    padding: 25px;
+    background: #5e9c97;
 }
-.header img{
+
+.header img {
     vertical-align: middle;
 }
-.logo{
+
+.logo {
     color: #bebbbb;
     font-family: 'Iceberg', cursive;
     font-size: 50px;
 }
+
 /* nav */
-nav{
+nav {
     display: flex;
-    
+
     justify-content: space-between;
     align-items: center;
 }
-.nav-link{
-    flex:1;
+
+.nav-link {
+    flex: 1;
     text-align: left;
 }
-.nav-link ul li{
+
+.nav-link ul li {
     list-style: none;
     display: inline-block;
     padding: 8px 25px;
     position: relative;
 }
-.nav-link ul li a{
+
+.nav-link ul li a {
     color: #bebbbb;
     text-decoration: none;
     font-size: 30px;
     font-family: 'Inter', sans-serif, bold;
-    padding:20px;
-    position: relative; top:25px;
+    padding: 20px;
+    position: relative;
+    top: 25px;
 }
-.nav-button{
+
+.nav-button {
     float: right;
     padding: 15px;
     font-family: 'Inter', sans-serif, bold;
     background-color: #d9d9d9;
     margin-right: 30px;
-    border:15px;
+    border: 15px;
     width: 200px;
-    cursor:pointer;
-    border-radius:10px;
+    cursor: pointer;
+    border-radius: 10px;
 }
+
 /* box */
-.container{
+.container {
     padding: 45px;
     background-color: white;
     border-radius: 15px;
@@ -70,10 +82,11 @@ nav{
     justify-content: center;
     align-items: center;
     width: 50%;
-    margin:30px auto;
+    margin: 30px auto;
     text-align: center;
 }
-.container-home{
+
+.container-home {
     padding: 0px;
     background-color: white;
     border-radius: 15px;
@@ -81,9 +94,10 @@ nav{
     justify-content: center;
     align-items: center;
     width: 80%;
-    margin:30px auto;
+    margin: 30px auto;
     text-align: center;
 }
+
 .cont-head input[type=text] {
     float: right;
     padding: 6px;
@@ -91,39 +105,44 @@ nav{
     border-radius: 5px;
     margin-right: 16px;
     font-size: 17px;
-    position: relative; top: 15px;
+    position: relative;
+    top: 15px;
 
-  }
-.cont-head{
-    background-color: #404E4D;
+}
+
+.cont-head {
+    background: #5e9c97;
     height: 60px;
     margin: 0;
-    border-top:15px;
+    border-top: 15px;
     flex: 0 0 auto;
-    border-bottom-width:5px ;
+    border-bottom-width: 5px;
     top: 0;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     text-align: left;
     padding-left: 15px;
-    color:white;
+    color: white;
 }
-.container a{
+
+.container a {
     color: black;
     text-decoration: none;
 }
-.container h2{
-    text-align: left ;
-    padding-left:25% ;
+
+.container h2 {
+    text-align: left;
+    padding-left: 25%;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
 }
-h3{
+
+h3 {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
 }
 
-.button{
+.button {
     background-color: #404E4D;
     border: none;
     text-align: center;
@@ -131,52 +150,60 @@ h3{
     cursor: pointer;
     padding: 10px;
     width: 51%;
-    color:white;
+    color: white;
 }
-.signup{
+
+.signup {
     min-height: 72vh;
 }
 
 
 /* Footer */
-.footer{
+.footer {
     padding: 31px;
     text-align: left;
-    background: #404E4D;
+    background: #5e9c97;
     min-height: 50px;
-    bottom:0;
+    bottom: 0;
     width: 100%;
     color: #bebbbb
 }
-.footer img{
+
+.footer img {
     vertical-align: middle;
 }
+
 /* Input */
-.input{
-    font-size:16px;
+.input {
+    font-size: 16px;
     height: 30px;
     width: 50%;
     border: 2px solid black;
 }
-.ctable{
+
+.ctable {
     font-family: "Inter";
-    font-size:12px;
+    font-size: 12px;
 }
-.ctable th{
+
+.ctable th {
     font-size: 12px;
     color: #75798a;
     font-weight: 500;
     border-bottom: 1px solid gray;
     padding: 5px 10px;
-} 
-.ctable td{
+}
+
+.ctable td {
     border-bottom: 1px solid gray;
     padding: 15px 5px;
 }
-.ctable img{
+
+.ctable img {
     height: 35px;
 }
-.u-image{
+
+.u-image {
     object-fit: cover;
     display: block;
     vertical-align: middle;
@@ -184,71 +211,87 @@ h3{
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
-.u-align-left{
-    text-align:left;
+
+.u-align-left {
+    text-align: left;
 }
-.u-section-2{
-    min-height:670px ;
+
+.u-section-2 {
+    min-height: 670px;
     background-image: url("/Users/johnpham/Documents/Mycrypt/mycrypt/static/mycrypt/img/background.png");
     background-position: 50% 50%;
 }
-.u.clearfix:before{
+
+.u.clearfix:before {
     content: '';
     display: table;
     box-sizing: border-box;
 }
-.u-layout-wrap{
+
+.u-layout-wrap {
     width: calc(((100% - 340px) / 2) + 340px);
     margin: 0 auto 0 0;
 }
-.u-layout{
-    padding:0;
+
+.u-layout {
+    padding: 0;
 }
-.u-layout-row{
+
+.u-layout-row {
     flex-direction: row;
     flex-wrap: wrap;
     min-height: fit-content;
     max-width: 100%;
 }
-.u-image-1{
+
+.u-image-1 {
     min-height: 690px;
     background-image: url("/Users/johnpham/Documents/Mycrypt/mycrypt/static/mycrypt/img/cypto.jpeg");
     background-position: 50% 50%;
 }
+
 .u-layout-cell {
     position: relative;
     display: flex;
     background-clip: padding-box;
     background-origin: padding-box;
 }
+
 .u-container-layout {
     position: relative;
     flex: 1;
     max-width: 100%;
     transition-duration: inherit;
 }
+
 .u-valign-bottom {
     display: flex;
     flex-direction: column;
 }
+
 .u-valign-bottom {
     justify-content: flex-end;
 }
+
 .u-section-2 .u-container-layout-1 {
     padding: 0;
 }
-.u-valign-middle{
+
+.u-valign-middle {
     display: flex;
     flex-direction: column;
 }
+
 .u-container-layout-2 {
     padding: 60px 40px 30px 30px;
 }
+
 .u-valign-middle {
     justify-content: center;
     display: flex;
     flex-direction: column;
 }
+
 .u-text-1 {
     font-weight: 700;
     font-size: 3.75rem;
