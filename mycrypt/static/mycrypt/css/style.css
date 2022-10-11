@@ -425,6 +425,12 @@ element.style {
     border-radius: 10px;
 }
 
+#home {
+    background-image:url("static/mycrypt/img/cytp.pneg"); 
+    background-size: cover;
+    background-position: center center; 
+}
+
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }

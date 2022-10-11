@@ -14,3 +14,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cryptoTracker.settings')
 
 application = get_wsgi_application()
+# os.environ["DJANGO_SETTINGS_MODULE"] = "cryptoTracker.settings" 
+
+# from cryptoTracker.wsgi import MyCryptApplication
+# application = MyCryptApplication(application)
