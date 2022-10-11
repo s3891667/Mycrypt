@@ -1,8 +1,16 @@
 {% extends 'mycrypt/home.html' %} 
 {% block title %}Coins{% endblock %} 
 {% block content %}
-<h1 id="stock2"></h1>
+    <div class="slider-text top-text">
+    <h1  class="top">
+        <span id="coinName"></span>
+    </h1>
+    <h1 id="stock2"></h1>
+        <h2>Invest In The Future Of Currency</h2>
+    </div>
 {% load static %}
 <script src="{% static 'mycrypt/javaScript/realTimeGraph.js' %}"></script>
-
+<script >
+    document.getElementById("coinName").innerHTML = window.location.href.split("/")[5]; ;
+</script>
 {% endblock %}

@@ -14,7 +14,10 @@ h1 {
     font-size: 40px;
 
 }
-
+button a {
+    text-decoration: none;
+    
+}
 /* Header/title/logo */
 .header {
     padding: 25px;
@@ -426,7 +429,7 @@ element.style {
 }
 
 #home {
-    background-image:url("static/mycrypt/img/cytp.pneg"); 
+    background-image:url("../../mycrypt/img/cypto.jpeg"); 
     background-size: cover;
     background-position: center center; 
 }

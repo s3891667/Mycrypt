@@ -18,16 +18,27 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     })
+    $('li a').ready(function(){
+      if($(this).attr('href') == window.location){
+        $(this).addClass('link');
+      }
+    })
   })
+
+
+
 </script>
 </head>
 <section class="header">
   <nav>
     <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
-    <h1 class="logo">MyCrypt</h1>
+        <h1 class="logo" > 
+          <a style="text-decoration: none; color:white;" href="{% url 'mycrypt:index' %}">
+            MyCrypt
+          </a>  </h1>
     <div class="nav-link" id="navlink">
       <ul>
-        <li><a href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
+        <li><a  href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
         <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
         <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
         {% block function %}
@@ -37,12 +48,12 @@
         </button>
         <br>
         {% else %}
-        <button class="nav-button">
-          <a href="{% url 'mycrypt:login' %}">Login</a>
-        </button>
-        <button class="nav-button" >
-          <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-        </button>
+          <button class="nav-button">
+            <a href="{% url 'mycrypt:login' %}">Login</a>
+          </button>
+          <button class="nav-button" >
+            <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
+          </button>
         {% endif %}
         {% if role == 'investor' %}
           {% if verified %}
@@ -66,20 +77,18 @@
           <h1>Cyrptocurrencies</h1>
         </div>
         <br><br>
-        <div class="date">
-          <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
-          <form method = "POST">
-            {%csrf_token%}
-              <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
-              <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
-              <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
-            </form>
-          </div>
-          <br><br>
-          <section class="p-5">
+        <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
+        <section class="p-5">
+            <div class="date">
+              <form method = "POST">
+                {%csrf_token%}
+                  <button class="btn btn-primary" onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
+                  <button class="btn btn-primary" onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
+                  <button class="btn btn-primary" onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+                </form>
+              </div>
             <div class="container table-bordered table-responsive">
               <table class="table table-hover">
-                
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -219,10 +228,13 @@
   });
   </script>
   {% endblock %}
-  <div class="footer">
-    <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
-    <p>Learn how to purchase and manage Cyrptocurrency</p>
-    <p class="lead">Copyright &copy; mycrypt 2022</p>
+  <div class="wrapper">
+    <div class="footer">
+      <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
+      <p>Learn how to purchase and manage Cyrptocurrency</p>
+      <p class="lead">Copyright &copy; mycrypt 2022</p>
+    </div>
+
   </div>
 </body>
 </html>

@@ -21,21 +21,24 @@
     <section class="header">
       <nav>
         <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
-        <h1 class="logo" >MyCrypt</h1>
+        <h1 class="logo" > 
+          <a style="text-decoration:none; color:white" href="{% url 'mycrypt:index' %}">
+            MyCrypt
+          </a>  </h1>
         <div class="nav-link" id="navlink">
           <ul>
-              <li><a href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
+              <li><a  href="{% url 'mycrypt:home' %}" style="color:#FFFFFB">Cyrptocurrencies</a></li>
               <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
               <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
               {% block function %}
               {% if current_user %}
               <button class="nav-button">
-                <a href="{%url 'mycrypt:logout'%}">Logout</a>
+                <a style="text-decoration: none" href="{%url 'mycrypt:logout'%}">Logout</a>
               </button>
               <br>
               {% else %}
-              <button class="nav-button">
-                <a href="{% url 'mycrypt:login' %}">Login</a>
+              <button  class="nav-button">
+                <a  href="{% url 'mycrypt:login' %}">Login</a>
               </button>
               <button class="nav-button" >
                 <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
@@ -49,14 +52,13 @@
     </section>
   </body>
   <section>
-    <div class="top-index" style= "background-image: url(static/img/cypto.jpeg)" >
+    <div class="top-index" style= "background-image: url(../../static/mycrypt/img/cypto.jpeg)" >
       <div class="top-container">
       <div class="slider-text top-text">
-        <h1 class="top">
-          <span>WELCOME</span> TO <span>MYCRYPT</span></h1>
-          <h2>Invest In The Future Of Currency</h2>
-          <p>We offers users a fully operational long-term rental platform. It plans to leverages blockchain technology to ensure seamless rental experience.</p>
-          <button class="glow-on-hover" type="button"><a href="{%url 'mycrypt:logout'%}">GET STARTED</a></button>
+        <h1 class="top"><span>WELCOME</span> TO <span>MYCRYPT</span></h1>
+          <!-- <h2>Invest In The Future Of Currency</h2>
+          <p>We offers users a fully operational long-term rental platform. It plans to leverages blockchain technology to ensure seamless rental experience.</p> -->
+          <button class="glow-on-hover"  type="button"><a style="color:white;" href="{%url 'mycrypt:logout'%}">GET STARTED</a></button>
         </div>
     </div>
   
@@ -96,10 +98,7 @@
             <p>Our chatbot can answer basic questions about cryptocurrency. Test it out!</p>
           </div>
         </div>
-        
-        <!-- <after></after> -->
       </div>
-      <!-- <after></after> -->
     </div>
   </section>
   
@@ -112,12 +111,14 @@
   <div class="i-row">
   <div class="col-lg-12 col-sm-12 col-xs-12">
     <div class="hero-text">
-  
-  
-  
     </div> 
   </div>
   </div>
   </div>
 </section>
+<div class="footer">
+  <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
+  <p>Learn how to purchase and manage Cyrptocurrency</p>
+  <p class="lead">Copyright &copy; mycrypt 2022</p>
+</div>
 </html>

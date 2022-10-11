@@ -1,3 +1,4 @@
+from cairo import Status
 from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.http import Http404, HttpResponse
@@ -5,6 +6,7 @@ from django.contrib.sessions.backends.base import *
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
+from sympy import content
 from mycrypt.forgot import ForgotForm
 import requests
 import json
@@ -74,12 +76,14 @@ def home(request):
     else:
         return redirect('/mycrypt/login/')
 
+
 def remove(request):
     if request.method == "POST":
         name = request.POST.get('coin')
         delCoin = Coin.objects.get(name=name)
         delCoin.delete()
     return redirect('/mycrypt/home/')
+
 
 def post(request):
     if request.method == 'POST':
@@ -98,6 +102,7 @@ def post(request):
 
 def coins(request, coin_name):
     param = {'current_user': request.session['user'],
+             'coin_name': coin_name
              }
     return render(request, 'mycrypt/coins.html', param)
 
@@ -182,7 +187,11 @@ def forgot(request):
 
 def learn(request):
     if 'user' in request.session:
-        return render(request, 'mycrypt/learn.html')
+        current_user = request.session['user']
+        contents = Content.objects.filter(status='p').all().values()
+        return render(request, 'mycrypt/learn.html', 
+        {'contents': contents,
+        'current_user': current_user})
     return redirect('/mycrypt/login/')
 
 

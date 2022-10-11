@@ -35,7 +35,6 @@ class Content(models.Model):
         ('p', 'Published'),
         ('w', 'Withdrawn'),
     ])
-
     def __str__(self):
         return self.title
 
