@@ -49,3 +49,18 @@
   }
 }
 
+.chatbot{
+  opacity: 0.9;
+position: fixed;
+bottom: 60px;
+left: 90%;
+margin-left: 40px;
+}
+
+iframe{
+  opacity: 0.85;
+position: fixed;
+bottom: 113px;
+left: 77%;
+margin-left: 40px;
+}

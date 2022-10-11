@@ -20,6 +20,13 @@
     })
   })
 </script>
+<script>
+$(document).ready(function(){
+  $(".chatbot").click(function(){
+    $("iframe").toggle();
+  });
+});
+</script>
 </head>
 <section class="header">
   <nav>
@@ -67,7 +74,8 @@
         </div>
         <br><br>
         <div class="date">
-          <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
+          <p class="btn btn-primary chatbot">Chatbot</p>
+          <iframe width="350" height="430" allow="microphone;" style="display: none;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
           <form method = "POST">
             {%csrf_token%}
               <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
