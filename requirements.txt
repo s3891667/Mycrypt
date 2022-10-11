@@ -1,10 +1,10 @@
 Django==3.2.12
 django-cron==0.6.0
 django-environ==0.9.0
-django-hashers-passlib==1.7.4
 passlib==1.7.4
+django-hashers-passlib==0.4
 regex==2022.9.13
 sqlparse==0.4.2
 unicodedata2==14.0.0
 urllib3==1.26.5
-django-heroku==0.3.1
+django-heroku== 0.3.1
