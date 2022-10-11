@@ -1,4 +1,3 @@
-from cairo import Status
 from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.http import Http404, HttpResponse
@@ -86,23 +85,32 @@ def remove(request):
 
 
 def post(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        body = request.POST.get('body')
-        source = request.POST.get('url')
-        status = request.POST.get('status')
-        user = request.session['user']
-        date = datetime.datetime.now().date()
-        post = Content(title=title, body=body, source=source,
-                       status=status, author=user, date=date)
-        post.save()
-    posts = Content.objects.all()
-    return render(request, 'mycrypt/post.html', posts)
+    if 'user' in request.session:
+        current_user = request.session['user']
+        current_user = User.objects.get(userName=current_user)
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            body = request.POST.get('body')
+            source = request.POST.get('url')
+            user = request.session['user']
+            date = datetime.datetime.now().date()
+            post = Content(title=title, body=body, source=source, status="d",
+                           author=user, date=date)
+            post.save()
+        return render(request, 'mycrypt/post.html', {'current_user': current_user,
+                                                     'role': current_user.role,
+                                                     'verified': current_user.verified})
+    else:
+        redirect('mycrypt/login/')
 
 
 def coins(request, coin_name):
+    current_user = request.session['user']
+    current_user = User.objects.get(userName=current_user)
     param = {'current_user': request.session['user'],
-             'coin_name': coin_name
+             'coin_name': coin_name,
+             'role': current_user.role,
+             'verified': current_user.verified
              }
     return render(request, 'mycrypt/coins.html', param)
 
@@ -188,10 +196,13 @@ def forgot(request):
 def learn(request):
     if 'user' in request.session:
         current_user = request.session['user']
+        current_user = User.objects.get(userName=current_user)
         contents = Content.objects.filter(status='p').all().values()
-        return render(request, 'mycrypt/learn.html', 
-        {'contents': contents,
-        'current_user': current_user})
+        return render(request, 'mycrypt/learn.html',
+                      {'contents': contents,
+                       'current_user': current_user,
+                       'role': current_user.role,
+                       'verified': current_user.verified})
     return redirect('/mycrypt/login/')
 
 
@@ -205,7 +216,9 @@ def watchlist(request):
                 default_period = period
         return render(request, 'mycrypt/watchlist.html', {
             'current_user': current_user,
-            'favorite': userCheck.coin.all()
+            'favorite': userCheck.coin.all(),
+            'role': userCheck.role,
+            'verified': userCheck.verified
         })
     else:
         return redirect('/mycrypt/login/')

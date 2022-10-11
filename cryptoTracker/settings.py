@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-# import environ
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +24,9 @@ SECRET_KEY = 'django-insecure-5^w251k(sift%_dx@q8=p7a)!s3o3a0hscw5+#(e-trl9w=gl)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+# ALLOWED_HOSTS = ['.vercel.app']
 
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'cryptoTracker.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
 }
 
 
@@ -143,8 +143,6 @@ AUTHENTICATION_BACKENDS = (
 
 SESSION_COOKIE_AGE = 60 * 60
 
-# env = environ.Env()
-# environ.Env.read_env()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -152,3 +150,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'khoaitrmit@gmail.com'
 EMAIL_HOST_PASSWORD = 'ymtiqyvtnkeweoen'
+import django_heroku
+django_heroku.settings(locals())

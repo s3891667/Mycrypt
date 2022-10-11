@@ -14,7 +14,7 @@ class Coin(models.Model):
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     userName = models.CharField(max_length=30)
-    passWord = models.CharField(max_length=50)
+    passWord = models.CharField(max_length=100)
     role = models.CharField(max_length=30)
     email = models.EmailField(max_length=254)
     coin = models.ManyToManyField(Coin)

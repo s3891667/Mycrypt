@@ -48,6 +48,11 @@ $(document).ready(function(){
         <li><a  href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
         <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
         <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
+        {% if role == 'investor' %}
+          {% if verified %}
+            <li><a href="{% url 'mycrypt:post'%}">Create post</a></li>
+          {% endif %}
+        {% endif %}
         {% block function %}
         {% if current_user %}
         <button class="nav-button">
@@ -61,13 +66,6 @@ $(document).ready(function(){
           <button class="nav-button" >
             <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
           </button>
-        {% endif %}
-        {% if role == 'investor' %}
-          {% if verified %}
-            <button class="nav-button" >
-              <a href="{% url 'mycrypt:post' %}">Create post</a>
-            </button>
-          {% endif %}
         {% endif %}
         {% endblock %}
       </div>
@@ -89,9 +87,9 @@ $(document).ready(function(){
           <iframe width="350" height="430" allow="microphone;" style="display: none;" src="https://console.dialogflow.com/api-client/demo/embedded/6e99d2bd-b0c2-45c4-b7b9-b0186856688f"></iframe>
           <form method = "POST">
             {%csrf_token%}
-              <button onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
-              <button onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
-              <button onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
+              <button class="btn btn-primary" onclick="window.location.reload();" name="period" type="submit", value="24h">24H</button>
+              <button  class="btn btn-primary" onclick="window.location.reload();" name="period" type="submit", value="7d">7D</button>
+              <button class="btn btn-primary" onclick= "window.location.reload();"name ="period" type="submit", value="14d">14D</button>
             </form>
           </div>
           <br><br>
@@ -139,7 +137,7 @@ $(document).ready(function(){
               </table>
             </div>
           </section>
-          <div class="align-middle">
+          <div class="nav justify-content-center ">
             <nav class="Page" aria-label="Page"> 
               <ul class="pagination">
                 <li class="page_item fast">
