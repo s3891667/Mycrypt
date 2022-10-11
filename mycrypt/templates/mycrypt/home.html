@@ -18,7 +18,15 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     })
+    $('li a').ready(function(){
+      if($(this).attr('href') == window.location){
+        $(this).addClass('link');
+      }
+    })
   })
+
+
+
 </script>
 <script>
 $(document).ready(function(){
@@ -31,10 +39,13 @@ $(document).ready(function(){
 <section class="header">
   <nav>
     <img src="{% static 'mycrypt/img/logo.png' %}" alt="LOGO" width="100px">
-    <h1 class="logo">MyCrypt</h1>
+        <h1 class="logo" > 
+          <a style="text-decoration: none; color:white;" href="{% url 'mycrypt:index' %}">
+            MyCrypt
+          </a>  </h1>
     <div class="nav-link" id="navlink">
       <ul>
-        <li><a href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
+        <li><a  href="{% url 'mycrypt:home' %}">Cyrptocurrencies</a></li>
         <li><a href="{% url 'mycrypt:learn' %}">Learn</a></li>
         <li><a href="{% url 'mycrypt:watchlist'%}">Watchlist</a></li>
         {% block function %}
@@ -44,12 +55,12 @@ $(document).ready(function(){
         </button>
         <br>
         {% else %}
-        <button class="nav-button">
-          <a href="{% url 'mycrypt:login' %}">Login</a>
-        </button>
-        <button class="nav-button" >
-          <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
-        </button>
+          <button class="nav-button">
+            <a href="{% url 'mycrypt:login' %}">Login</a>
+          </button>
+          <button class="nav-button" >
+            <a href="{% url 'mycrypt:signup' %}">Sign Up</a>
+          </button>
         {% endif %}
         {% if role == 'investor' %}
           {% if verified %}
@@ -87,7 +98,6 @@ $(document).ready(function(){
           <section class="p-5">
             <div class="container table-bordered table-responsive">
               <table class="table table-hover">
-                
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -227,10 +237,13 @@ $(document).ready(function(){
   });
   </script>
   {% endblock %}
-  <div class="footer">
-    <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
-    <p>Learn how to purchase and manage Cyrptocurrency</p>
-    <p class="lead">Copyright &copy; mycrypt 2022</p>
+  <div class="wrapper">
+    <div class="footer">
+      <h1><img src="{% static 'mycrypt/img/Ramen.png' %}" alt="LOGO" width="50px">mycrypt</h1>
+      <p>Learn how to purchase and manage Cyrptocurrency</p>
+      <p class="lead">Copyright &copy; mycrypt 2022</p>
+    </div>
+
   </div>
 </body>
 </html>

@@ -3,213 +3,36 @@
     <section class="p-5 bg-white text-dark text-center text-sm-start">
       <div class="container">
         <div>
-          <h1>learn</h1>
+          <h1>Mycrypt Knowledge</h1>
+          {% for content in contents %}
           <div id="accordion">
             <div class="card">
               <div class="card-header">
-                <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseOne"
-                class="collapse show"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
                 <a
                   class="collapsed btn"
                   data-bs-toggle="collapse"
-                  href="#collapseTwo"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseTwo"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseThree"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseThree"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseFour"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseFour"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseFive"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseFive"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseSix"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseSix"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseSeven"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseSeven"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseEight"
-                >
-                  learn 1
-                </a>
-              </div>
-              <div
-                id="collapseEight"
-                class="collapse"
-                data-bs-parent="#accordion"
-              >
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <a
-                  class="collapsed btn"
-                  data-bs-toggle="collapse"
-                  href="#collapseNine"
-                >
-                  learn 1
+                  href="#collapseNine">
+                  <h3>
+                    {{content.title}}
+                  </h3>
                 </a>
               </div>
               <div
                 id="collapseNine"
                 class="collapse"
-                data-bs-parent="#accordion"
-              >
+                data-bs-parent="#accordion">
                 <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>{{content.body}}</p> 
+                  <strong>
+                    <p>Author: {{content.author}}</p>
+                    <p>Date: {{content.date}}</p>
+                    <a href="{{content.source}}">{{content.source}} </a>
+                  </strong>
                 </div>
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
       </div>
     </section>
