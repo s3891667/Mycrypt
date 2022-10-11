@@ -3,11 +3,15 @@
 {% block function %} 
 {% endblock %}
 {%block content %}
+<head>
+    <link rel="stylesheet" href="../../static/mycrypt/style3.css">
+    
+</head>
 <div class="forgot">
     <div class="container">
         <h1>Sign up</h1>
         <br><br>
-        {% if message %}
+        {% if message %}S
             <div class="alert alert-danger" role="alert">
                 {{ message }}
             </div>
@@ -15,6 +19,7 @@
         <form method="POST">
             {% csrf_token %}
             <h2>Username</h2>
+            
             <input class="input" type="text" name="uname">
             <br><br>
             <h2>Email</h2>
