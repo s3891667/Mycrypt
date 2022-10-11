@@ -5,7 +5,6 @@ from django.contrib.sessions.backends.base import *
 from django.contrib.auth.hashers import make_password
 from passlib.handlers.django import django_pbkdf2_sha256
 from django.views.decorators.clickjacking import xframe_options_deny
-from sympy import content
 from mycrypt.forgot import ForgotForm
 import requests
 import json
