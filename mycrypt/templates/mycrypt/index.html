@@ -8,7 +8,7 @@
       <link rel="icon" href="{% static 'mycrypt/img/Logo.png' %}">
       <link rel="stylesheet" href="{% static 'mycrypt/css/bootstrap.css' %}">
       <title>MyCrypt</title>
-      <script
+      <script 
         type="text/javascript"
         src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"
       ></script>
@@ -48,17 +48,76 @@
       </nav>
     </section>
   </body>
-<section class="u-align-left u-image u-section-2 u-clearfix" data-image-width="1980" data-image-height="1320">
-  <div class="u-layout-wrap">
-    <div class="u-layout">
-      <div class="u-layout-row">
-        <div class="u-image u-layout-cell u-layout u-image-1" data-image-width="1355" data-image-height="1080">
-          <div class="u-container-layout u-valign-bottom u-container-layout-1">
+  <section>
+    <div class="top-index" style= "background-image: url( {% static 'mycrypt/img/cypto.jpeg' %} )" >
+      <div class="top-container">
+      <div class="slider-text top-text">
+        <h1 class="top">
+          <span>WELCOME</span> TO <span>MYCRYPT</span></h1>
+          <h2>Invest In The Future Of Currency</h2>
+          <p>We offers users a fully operational long-term rental platform. It plans to leverages blockchain technology to ensure seamless rental experience.</p>
+          <button class="glow-on-hover" type="button"><a href="{%url 'mycrypt:logout'%}">GET STARTED</a></button>
+        </div>
+    </div>
+  
+  </section>
+  
+  
+  <section class="features">
+    <div class="features-contrainer">
+  
+      <div class="row features-row">
+  
+        <div class="features-box col-md-4 col-sm-12">
+          <span class="features-icon">
+            <img src="{% static 'mycrypt/img/logo.png' %}" width="50px" height="50px">
+          </span>
+          <div class="features-box-content">
+            <h3>Watch Your Favourite Currencies for Quick Access</h3>
+            <p>Have a particular currency you want quick access to? With the watchlist, you can save your favourite currencies and access them any time.</p>
           </div>
         </div>
-        <div class="u-align-left u-layout-cell">
-          <div class="u-valign-middle u-container-layout">
-            <h1 class="u-text">Welcome To MyCrypt</h1>
-
+        <div class="features-box two col-md-4 col-sm-12">
+          <span class="features-icon">
+            <img src="{% static 'mycrypt/img/logo.png' %}" width="50px" height="50px">
+          </span>
+          <div class="features-box-content">
+            <h3>Take Some Professional Advice From Our Learn Page</h3>
+            <p>We offer free, professional advice from experts in the field with our "Learn" page. Learn many helpful tips from experienced investors!
+            </p>
+          </div>
+        </div>
+        <div class="features-box three col-md-4 col-sm-12">
+          <span class="features-icon">
+            <img src="{% static 'mycrypt/img/logo.png' %}" width="50px" height="50px">
+          </span>
+          <div class="features-box-content">
+            <h3>Need Help? Try Asking Our Chatbot Questions</h3>
+            <p>Our chatbot can answer basic questions about cryptocurrency. Test it out!</p>
+          </div>
+        </div>
+        
+        <after></after>
+      </div>
+      <after></after>
+    </div>
+  </section>
+  
+  <section id="home" class="home_bg" style="background-image: url({% static 'mycrypt/img/cypto.jpeg' %});  background-size:cover; background-position: center center;">
+    <div id="particles-js">
+      <canvas class="particles-js-canvas-el" width="494" height="2976" style="width: 100%; height: 100%;"></canvas>
+    </div>
+  
+  <div class="i-container">
+  <div class="i-row">
+  <div class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="hero-text">
+  
+  
+  
+    </div> 
+  </div>
+  </div>
+  </div>
 </section>
 </html>
